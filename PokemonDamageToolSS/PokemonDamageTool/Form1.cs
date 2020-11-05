@@ -22,11 +22,17 @@ namespace PokemonDamageTool
 
         private int maxDamage;
 
+        Pokemon pokemon1;
+
+        Pokemon pokemon2;
+
 
 
         public Form1()
         {
             InitializeComponent();
+
+            Initialize();
 
             attackNum = 0;
 
@@ -37,6 +43,17 @@ namespace PokemonDamageTool
             minDamage = 0;
 
             maxDamage = 0;
+        }
+
+        private void Initialize()
+        {
+            pokemon1 = new Pokemon("ミミッキュ", 142, 100);
+            pokemon2 = new Pokemon("ガブリアス", 182, 115);
+
+            attackPokeLabel.Text = pokemon1.Name;
+            attackPowerLabel.Text = pokemon1.Attack.ToString();
+            defensePokeLabel.Text = pokemon2.Name;
+            defensePowerLabel.Text = pokemon2.Defense.ToString();
         }
 
 
@@ -55,8 +72,11 @@ namespace PokemonDamageTool
         }
 
         //ダメージ計算
-        private void DamageCalculation()
+        private void DamageCalculation(int attack, int defense)
         {
+            attackNum = attack;
+            defenseNum = defense;
+
             int damageNum;
 
             //レベル計算
@@ -106,22 +126,6 @@ namespace PokemonDamageTool
                 minDamage = 1;
         }
 
-
-
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-            float i = (float)numericUpDown1.Value;
-
-            attackNum = i;
-        }
-
-        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
-        {
-            float i = (float)numericUpDown2.Value;
-
-            defenseNum = i;
-        }
-
         private void numericUpDown3_ValueChanged(object sender, EventArgs e)
         {
             float num = (float)numericUpDown3.Value;
@@ -131,7 +135,7 @@ namespace PokemonDamageTool
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DamageCalculation();
+            DamageCalculation(pokemon1.Attack, pokemon2.Defense);
 
             damageLabel.Text = minDamage.ToString() + "～" + maxDamage.ToString();
 
@@ -154,6 +158,26 @@ namespace PokemonDamageTool
         }
 
         private void notVeryEffectiveCB_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void attackPoke_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void defensePokeLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void attackPowerLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void defensePowerLabel_Click(object sender, EventArgs e)
         {
 
         }

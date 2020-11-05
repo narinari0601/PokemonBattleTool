@@ -8,3 +8,13 @@ C:\Users\K015A1881\Documents\PokemonDamageToolSS\PokemonDamageTool\obj\Debug\Pok
 C:\Users\K015A1881\Documents\PokemonDamageToolSS\PokemonDamageTool\obj\Debug\PokemonDamageTool.exe
 C:\Users\K015A1881\Documents\PokemonDamageToolSS\PokemonDamageTool\obj\Debug\PokemonDamageTool.pdb
 C:\Users\K015A1881\Documents\PokemonDamageToolSS\PokemonDamageTool\obj\Debug\PokemonDamageTool.Form1.resources
+C:\Users\K015A1881\Documents\PokemonBattleTool\PokemonDamageToolSS\PokemonDamageTool\bin\Debug\PokemonDamageTool.exe.config
+C:\Users\K015A1881\Documents\PokemonBattleTool\PokemonDamageToolSS\PokemonDamageTool\bin\Debug\PokemonDamageTool.exe
+C:\Users\K015A1881\Documents\PokemonBattleTool\PokemonDamageToolSS\PokemonDamageTool\bin\Debug\PokemonDamageTool.pdb
+C:\Users\K015A1881\Documents\PokemonBattleTool\PokemonDamageToolSS\PokemonDamageTool\obj\Debug\PokemonDamageTool.csprojAssemblyReference.cache
+C:\Users\K015A1881\Documents\PokemonBattleTool\PokemonDamageToolSS\PokemonDamageTool\obj\Debug\PokemonDamageTool.Form1.resources
+C:\Users\K015A1881\Documents\PokemonBattleTool\PokemonDamageToolSS\PokemonDamageTool\obj\Debug\PokemonDamageTool.Properties.Resources.resources
+C:\Users\K015A1881\Documents\PokemonBattleTool\PokemonDamageToolSS\PokemonDamageTool\obj\Debug\PokemonDamageTool.csproj.GenerateResource.cache
+C:\Users\K015A1881\Documents\PokemonBattleTool\PokemonDamageToolSS\PokemonDamageTool\obj\Debug\PokemonDamageTool.csproj.CoreCompileInputs.cache
+C:\Users\K015A1881\Documents\PokemonBattleTool\PokemonDamageToolSS\PokemonDamageTool\obj\Debug\PokemonDamageTool.exe
+C:\Users\K015A1881\Documents\PokemonBattleTool\PokemonDamageToolSS\PokemonDamageTool\obj\Debug\PokemonDamageTool.pdb
