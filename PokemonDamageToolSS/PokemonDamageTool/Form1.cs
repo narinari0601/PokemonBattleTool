@@ -22,17 +22,13 @@ namespace PokemonDamageTool
 
         private int maxDamage;
 
-        private Pokemon pokemon1;
-
-        private Pokemon pokemon2;
-
         private Pokemon attackPoke;
 
         private Pokemon defensePoke;
 
         private List<Pokemon> pokemonList;
 
-
+        private CSVReader cSVReader;
 
         public Form1()
         {
@@ -53,13 +49,38 @@ namespace PokemonDamageTool
 
         private void Initialize()
         {
+            cSVReader = new CSVReader();
+            cSVReader.Read("Resources/csv/PokemonData.csv");
+
+            var data = cSVReader.GetDate();
+
             pokemonList = new List<Pokemon>();
 
-            pokemon1 = new Pokemon("ミミッキュ", 142, 100);
-            pokemon2 = new Pokemon("ガブリアス", 182, 115);
+            for (int i = 1; i < 12; i++)
+            {
+                var poke = data[i];
+                Pokemon pokemon = new Pokemon();
+                pokemon.Name = poke[1];
+                pokemon.Type1 = poke[2];
+                pokemon.Type2 = poke[3];
+                pokemon.Ability1 = poke[4];
+                pokemon.Ability2 = poke[5];
+                pokemon.HiddenAbility = poke[6];
+                pokemon.Hp = int.Parse(poke[7]);
+                pokemon.Attack = int.Parse(poke[8]);
+                pokemon.Defense = int.Parse(poke[9]);
+                pokemon.SpAttack = int.Parse(poke[10]);
+                pokemon.SpDefense = int.Parse(poke[11]);
+                pokemon.Speed = int.Parse(poke[12]);
 
-            pokemonList.Add(pokemon1);
-            pokemonList.Add(pokemon2);
+                pokemonList.Add(pokemon);
+            }
+
+            //pokemon1 = new Pokemon("ミミッキュ", 142, 100);
+            //pokemon2 = new Pokemon("ガブリアス", 182, 115);
+
+            //pokemonList.Add(pokemon1);
+            //pokemonList.Add(pokemon2);
             
             //attackPowerLabel.Text = pokemon1.Attack.ToString();
             //defensePowerLabel.Text = pokemon2.Defense.ToString();
