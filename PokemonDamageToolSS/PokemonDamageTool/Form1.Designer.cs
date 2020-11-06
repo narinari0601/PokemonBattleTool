@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.attackLabel = new System.Windows.Forms.Label();
-            this.defenseLabel = new System.Windows.Forms.Label();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.powerLabel = new System.Windows.Forms.Label();
             this.damageLabel = new System.Windows.Forms.Label();
@@ -41,6 +39,8 @@
             this.defensePokeLabel = new System.Windows.Forms.Label();
             this.attackPowerLabel = new System.Windows.Forms.Label();
             this.defensePowerLabel = new System.Windows.Forms.Label();
+            this.attackPokeTB = new System.Windows.Forms.TextBox();
+            this.defensePokeTB = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,24 +53,6 @@
             this.button1.Text = "計算";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // attackLabel
-            // 
-            this.attackLabel.AutoSize = true;
-            this.attackLabel.Location = new System.Drawing.Point(113, 67);
-            this.attackLabel.Name = "attackLabel";
-            this.attackLabel.Size = new System.Drawing.Size(52, 15);
-            this.attackLabel.TabIndex = 4;
-            this.attackLabel.Text = "攻撃側\r\n";
-            // 
-            // defenseLabel
-            // 
-            this.defenseLabel.AutoSize = true;
-            this.defenseLabel.Location = new System.Drawing.Point(520, 67);
-            this.defenseLabel.Name = "defenseLabel";
-            this.defenseLabel.Size = new System.Drawing.Size(52, 15);
-            this.defenseLabel.TabIndex = 5;
-            this.defenseLabel.Text = "防御側";
             // 
             // numericUpDown3
             // 
@@ -145,7 +127,7 @@
             // attackPokeLabel
             // 
             this.attackPokeLabel.AutoSize = true;
-            this.attackPokeLabel.Location = new System.Drawing.Point(96, 23);
+            this.attackPokeLabel.Location = new System.Drawing.Point(97, 48);
             this.attackPokeLabel.Name = "attackPokeLabel";
             this.attackPokeLabel.Size = new System.Drawing.Size(83, 15);
             this.attackPokeLabel.TabIndex = 15;
@@ -155,7 +137,7 @@
             // defensePokeLabel
             // 
             this.defensePokeLabel.AutoSize = true;
-            this.defensePokeLabel.Location = new System.Drawing.Point(520, 23);
+            this.defensePokeLabel.Location = new System.Drawing.Point(514, 48);
             this.defensePokeLabel.Name = "defensePokeLabel";
             this.defensePokeLabel.Size = new System.Drawing.Size(83, 15);
             this.defensePokeLabel.TabIndex = 16;
@@ -182,11 +164,29 @@
             this.defensePowerLabel.Text = "防御力";
             this.defensePowerLabel.Click += new System.EventHandler(this.defensePowerLabel_Click);
             // 
+            // attackPokeTB
+            // 
+            this.attackPokeTB.Location = new System.Drawing.Point(89, 76);
+            this.attackPokeTB.Name = "attackPokeTB";
+            this.attackPokeTB.Size = new System.Drawing.Size(100, 22);
+            this.attackPokeTB.TabIndex = 19;
+            this.attackPokeTB.TextChanged += new System.EventHandler(this.attackPokeTB_TextChanged);
+            // 
+            // defensePokeTB
+            // 
+            this.defensePokeTB.Location = new System.Drawing.Point(508, 76);
+            this.defensePokeTB.Name = "defensePokeTB";
+            this.defensePokeTB.Size = new System.Drawing.Size(100, 22);
+            this.defensePokeTB.TabIndex = 20;
+            this.defensePokeTB.TextChanged += new System.EventHandler(this.defensePokeTB_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1262, 673);
+            this.Controls.Add(this.defensePokeTB);
+            this.Controls.Add(this.attackPokeTB);
             this.Controls.Add(this.defensePowerLabel);
             this.Controls.Add(this.attackPowerLabel);
             this.Controls.Add(this.defensePokeLabel);
@@ -197,8 +197,6 @@
             this.Controls.Add(this.damageLabel);
             this.Controls.Add(this.powerLabel);
             this.Controls.Add(this.numericUpDown3);
-            this.Controls.Add(this.defenseLabel);
-            this.Controls.Add(this.attackLabel);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -210,8 +208,6 @@
 
         #endregion
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label attackLabel;
-        private System.Windows.Forms.Label defenseLabel;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.Label powerLabel;
         private System.Windows.Forms.Label damageLabel;
@@ -222,6 +218,8 @@
         private System.Windows.Forms.Label defensePokeLabel;
         private System.Windows.Forms.Label attackPowerLabel;
         private System.Windows.Forms.Label defensePowerLabel;
+        private System.Windows.Forms.TextBox attackPokeTB;
+        private System.Windows.Forms.TextBox defensePokeTB;
     }
 }
 

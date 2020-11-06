@@ -22,9 +22,15 @@ namespace PokemonDamageTool
 
         private int maxDamage;
 
-        Pokemon pokemon1;
+        private Pokemon pokemon1;
 
-        Pokemon pokemon2;
+        private Pokemon pokemon2;
+
+        private Pokemon attackPoke;
+
+        private Pokemon defensePoke;
+
+        private List<Pokemon> pokemonList;
 
 
 
@@ -47,13 +53,16 @@ namespace PokemonDamageTool
 
         private void Initialize()
         {
+            pokemonList = new List<Pokemon>();
+
             pokemon1 = new Pokemon("ミミッキュ", 142, 100);
             pokemon2 = new Pokemon("ガブリアス", 182, 115);
 
-            attackPokeLabel.Text = pokemon1.Name;
-            attackPowerLabel.Text = pokemon1.Attack.ToString();
-            defensePokeLabel.Text = pokemon2.Name;
-            defensePowerLabel.Text = pokemon2.Defense.ToString();
+            pokemonList.Add(pokemon1);
+            pokemonList.Add(pokemon2);
+            
+            //attackPowerLabel.Text = pokemon1.Attack.ToString();
+            //defensePowerLabel.Text = pokemon2.Defense.ToString();
         }
 
 
@@ -135,7 +144,7 @@ namespace PokemonDamageTool
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DamageCalculation(pokemon1.Attack, pokemon2.Defense);
+            DamageCalculation(attackPoke.Attack, defensePoke.Defense);
 
             damageLabel.Text = minDamage.ToString() + "～" + maxDamage.ToString();
 
@@ -180,6 +189,34 @@ namespace PokemonDamageTool
         private void defensePowerLabel_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void attackPokeTB_TextChanged(object sender, EventArgs e)
+        {
+            string pokeName = attackPokeTB.Text;
+
+            foreach (var poke in pokemonList)
+            {
+                if (poke.Name == pokeName)
+                {
+                    attackPowerLabel.Text = poke.Attack.ToString();
+                    attackPoke = poke;
+                }
+            }
+        }
+
+        private void defensePokeTB_TextChanged(object sender, EventArgs e)
+        {
+            string pokeName = defensePokeTB.Text;
+
+            foreach (var poke in pokemonList)
+            {
+                if (poke.Name == pokeName)
+                {
+                    defensePowerLabel.Text = poke.Defense.ToString();
+                    defensePoke = poke;
+                }
+            }
         }
     }
 }
