@@ -51,5 +51,22 @@ namespace PokemonDamageTool
         public int SpAttack { get => spAttack; set => spAttack = value; }
         public int SpDefense { get => spDefense; set => spDefense = value; }
         public int Speed { get => speed; set => speed = value; }
+
+
+        public void Initialize(string[] data)
+        {
+            name = data[1];
+            type1 = data[2];
+            type2 = data[3];
+            ability1 = data[4];
+            ability2 = data[5];
+            hiddenAbility = data[6];
+            hp = int.Parse(data[7]);
+            attack = int.Parse(data[8]);
+            defense = int.Parse(data[9]);
+            spAttack = int.Parse(data[10]);
+            spDefense = int.Parse(data[11]);
+            speed = int.Parse(data[12]);
+        }
     }
 }
