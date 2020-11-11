@@ -72,6 +72,8 @@ namespace PokemonDamageTool
                 pokemonList.Add(pokemon);
             }
 
+            int a= pokemonList[0].RealNumberCalculation(1);
+
             //pokemon1 = new Pokemon("ミミッキュ", 142, 100);
             //pokemon2 = new Pokemon("ガブリアス", 182, 115);
 

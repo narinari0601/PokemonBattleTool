@@ -32,6 +32,16 @@ namespace PokemonDamageTool
 
         private int speed;
 
+        private int[] baseStatus;
+
+        //個体値
+        private int individualValue;
+
+        //努力値
+        private int effortValue;
+
+        private int level;
+
         //コンストラクタ
         public Pokemon()
         {
@@ -55,18 +65,51 @@ namespace PokemonDamageTool
 
         public void Initialize(string[] data)
         {
+            individualValue = 31;
+            effortValue = 0;
+            level = 50;
+
+            
+
             name = data[1];
             type1 = data[2];
             type2 = data[3];
             ability1 = data[4];
             ability2 = data[5];
             hiddenAbility = data[6];
+            
             hp = int.Parse(data[7]);
             attack = int.Parse(data[8]);
             defense = int.Parse(data[9]);
             spAttack = int.Parse(data[10]);
             spDefense = int.Parse(data[11]);
             speed = int.Parse(data[12]);
+
+            baseStatus = new int[6];
+            baseStatus[0] = int.Parse(data[7]);
+            baseStatus[1] = int.Parse(data[8]);
+            baseStatus[2] = int.Parse(data[9]);
+            baseStatus[3] = int.Parse(data[10]);
+            baseStatus[4] = int.Parse(data[11]);
+            baseStatus[5] = int.Parse(data[12]);
+        }
+        
+        //実数値計算
+        public int RealNumberCalculation(int index)
+        {
+            //HP
+            if (index == 0)
+            {
+                return (baseStatus[index] * 2 + individualValue + effortValue / 4) * level / 100 + level + 10;
+            }
+
+            //HP以外
+            if (index > 0 && index < 6)
+            {
+                return ((baseStatus[index] * 2 + individualValue + effortValue / 4) * level / 100 + 5);
+            }
+
+            return 0;
         }
     }
 }
