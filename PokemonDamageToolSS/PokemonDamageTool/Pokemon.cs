@@ -61,7 +61,8 @@ namespace PokemonDamageTool
         public int SpAttack { get => spAttack; set => spAttack = value; }
         public int SpDefense { get => spDefense; set => spDefense = value; }
         public int Speed { get => speed; set => speed = value; }
-
+        public int IndividualValue { get => individualValue; set => individualValue = value; }
+        public int EffortValue { get => effortValue; set => effortValue = value; }
 
         public void Initialize(string[] data)
         {

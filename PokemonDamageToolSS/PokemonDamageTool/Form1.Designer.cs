@@ -67,9 +67,14 @@
             this.yourPokeRB1 = new System.Windows.Forms.RadioButton();
             this.attackPokeLabel = new System.Windows.Forms.Label();
             this.defensePokeLabel = new System.Windows.Forms.Label();
+            this.attackPokeEVLabel = new System.Windows.Forms.Label();
+            this.attackEVNumUD = new System.Windows.Forms.NumericUpDown();
+            this.defenseEVNumUD = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             this.myPartyGB.SuspendLayout();
             this.yourPartyGB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.attackEVNumUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.defenseEVNumUD)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -84,12 +89,13 @@
             // 
             // numericUpDown3
             // 
+            this.numericUpDown3.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.numericUpDown3.Increment = new decimal(new int[] {
             5,
             0,
             0,
             0});
-            this.numericUpDown3.Location = new System.Drawing.Point(944, 161);
+            this.numericUpDown3.Location = new System.Drawing.Point(1092, 194);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             250,
             0,
@@ -103,7 +109,7 @@
             // powerLabel
             // 
             this.powerLabel.AutoSize = true;
-            this.powerLabel.Location = new System.Drawing.Point(970, 117);
+            this.powerLabel.Location = new System.Drawing.Point(1118, 150);
             this.powerLabel.Name = "powerLabel";
             this.powerLabel.Size = new System.Drawing.Size(52, 15);
             this.powerLabel.TabIndex = 7;
@@ -155,27 +161,27 @@
             // attackLabel
             // 
             this.attackLabel.AutoSize = true;
-            this.attackLabel.Location = new System.Drawing.Point(805, 73);
+            this.attackLabel.Location = new System.Drawing.Point(723, 64);
             this.attackLabel.Name = "attackLabel";
-            this.attackLabel.Size = new System.Drawing.Size(83, 15);
+            this.attackLabel.Size = new System.Drawing.Size(52, 15);
             this.attackLabel.TabIndex = 15;
-            this.attackLabel.Text = "攻撃ポケモン";
+            this.attackLabel.Text = "攻撃側";
             this.attackLabel.Click += new System.EventHandler(this.attackPoke_Click);
             // 
             // defenseLabel
             // 
             this.defenseLabel.AutoSize = true;
-            this.defenseLabel.Location = new System.Drawing.Point(1100, 73);
+            this.defenseLabel.Location = new System.Drawing.Point(960, 64);
             this.defenseLabel.Name = "defenseLabel";
-            this.defenseLabel.Size = new System.Drawing.Size(83, 15);
+            this.defenseLabel.Size = new System.Drawing.Size(52, 15);
             this.defenseLabel.TabIndex = 16;
-            this.defenseLabel.Text = "防御ポケモン";
+            this.defenseLabel.Text = "防御側";
             this.defenseLabel.Click += new System.EventHandler(this.defensePokeLabel_Click);
             // 
             // attackPowerLabel
             // 
             this.attackPowerLabel.AutoSize = true;
-            this.attackPowerLabel.Location = new System.Drawing.Point(809, 161);
+            this.attackPowerLabel.Location = new System.Drawing.Point(634, 150);
             this.attackPowerLabel.Name = "attackPowerLabel";
             this.attackPowerLabel.Size = new System.Drawing.Size(52, 15);
             this.attackPowerLabel.TabIndex = 17;
@@ -185,7 +191,7 @@
             // defensePowerLabel
             // 
             this.defensePowerLabel.AutoSize = true;
-            this.defensePowerLabel.Location = new System.Drawing.Point(1115, 156);
+            this.defensePowerLabel.Location = new System.Drawing.Point(884, 157);
             this.defensePowerLabel.Name = "defensePowerLabel";
             this.defensePowerLabel.Size = new System.Drawing.Size(52, 15);
             this.defensePowerLabel.TabIndex = 18;
@@ -467,7 +473,7 @@
             // attackPokeLabel
             // 
             this.attackPokeLabel.AutoSize = true;
-            this.attackPokeLabel.Location = new System.Drawing.Point(809, 117);
+            this.attackPokeLabel.Location = new System.Drawing.Point(719, 108);
             this.attackPokeLabel.Name = "attackPokeLabel";
             this.attackPokeLabel.Size = new System.Drawing.Size(68, 15);
             this.attackPokeLabel.TabIndex = 24;
@@ -477,18 +483,68 @@
             // defensePokeLabel
             // 
             this.defensePokeLabel.AutoSize = true;
-            this.defensePokeLabel.Location = new System.Drawing.Point(1100, 117);
+            this.defensePokeLabel.Location = new System.Drawing.Point(952, 108);
             this.defensePokeLabel.Name = "defensePokeLabel";
             this.defensePokeLabel.Size = new System.Drawing.Size(68, 15);
             this.defensePokeLabel.TabIndex = 25;
             this.defensePokeLabel.Text = "ポケモン名";
             this.defensePokeLabel.Click += new System.EventHandler(this.defensePokeLabel_Click_1);
             // 
+            // attackPokeEVLabel
+            // 
+            this.attackPokeEVLabel.AutoSize = true;
+            this.attackPokeEVLabel.Location = new System.Drawing.Point(634, 194);
+            this.attackPokeEVLabel.Name = "attackPokeEVLabel";
+            this.attackPokeEVLabel.Size = new System.Drawing.Size(52, 15);
+            this.attackPokeEVLabel.TabIndex = 26;
+            this.attackPokeEVLabel.Text = "努力値";
+            // 
+            // attackEVNumUD
+            // 
+            this.attackEVNumUD.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.attackEVNumUD.Increment = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.attackEVNumUD.Location = new System.Drawing.Point(714, 192);
+            this.attackEVNumUD.Maximum = new decimal(new int[] {
+            252,
+            0,
+            0,
+            0});
+            this.attackEVNumUD.Name = "attackEVNumUD";
+            this.attackEVNumUD.Size = new System.Drawing.Size(73, 22);
+            this.attackEVNumUD.TabIndex = 27;
+            this.attackEVNumUD.ValueChanged += new System.EventHandler(this.attackEVNumUD_ValueChanged);
+            // 
+            // defenseEVNumUD
+            // 
+            this.defenseEVNumUD.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.defenseEVNumUD.Increment = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.defenseEVNumUD.Location = new System.Drawing.Point(947, 192);
+            this.defenseEVNumUD.Maximum = new decimal(new int[] {
+            252,
+            0,
+            0,
+            0});
+            this.defenseEVNumUD.Name = "defenseEVNumUD";
+            this.defenseEVNumUD.Size = new System.Drawing.Size(73, 22);
+            this.defenseEVNumUD.TabIndex = 28;
+            this.defenseEVNumUD.ValueChanged += new System.EventHandler(this.defenseEVNumUD_ValueChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1262, 673);
+            this.Controls.Add(this.defenseEVNumUD);
+            this.Controls.Add(this.attackEVNumUD);
+            this.Controls.Add(this.attackPokeEVLabel);
             this.Controls.Add(this.defensePokeLabel);
             this.Controls.Add(this.attackPokeLabel);
             this.Controls.Add(this.yourPartyGB);
@@ -511,6 +567,8 @@
             this.myPartyGB.PerformLayout();
             this.yourPartyGB.ResumeLayout(false);
             this.yourPartyGB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.attackEVNumUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.defenseEVNumUD)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -556,6 +614,9 @@
         private System.Windows.Forms.RadioButton yourPokeRB1;
         private System.Windows.Forms.Label attackPokeLabel;
         private System.Windows.Forms.Label defensePokeLabel;
+        private System.Windows.Forms.Label attackPokeEVLabel;
+        private System.Windows.Forms.NumericUpDown attackEVNumUD;
+        private System.Windows.Forms.NumericUpDown defenseEVNumUD;
     }
 }
 

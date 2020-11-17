@@ -56,6 +56,20 @@ namespace PokemonDamageTool
         {
             myPokeArray = new Pokemon[6];
             yourPokeArray = new Pokemon[6];
+            
+            myPokeTB1.PreviewKeyDown += myPokeTB1_PreviewKeyDown;
+            myPokeTB2.PreviewKeyDown += myPokeTB2_PreviewKeyDown;
+            myPokeTB3.PreviewKeyDown += myPokeTB3_PreviewKeyDown;
+            myPokeTB4.PreviewKeyDown += myPokeTB4_PreviewKeyDown;
+            myPokeTB5.PreviewKeyDown += myPokeTB5_PreviewKeyDown;
+            myPokeTB6.PreviewKeyDown += myPokeTB6_PreviewKeyDown;
+
+            yourPokeTB1.PreviewKeyDown += yourPokeTB1_PreviewKeyDown;
+            yourPokeTB2.PreviewKeyDown += yourPokeTB2_PreviewKeyDown;
+            yourPokeTB3.PreviewKeyDown += yourPokeTB3_PreviewKeyDown;
+            yourPokeTB4.PreviewKeyDown += yourPokeTB4_PreviewKeyDown;
+            yourPokeTB5.PreviewKeyDown += yourPokeTB5_PreviewKeyDown;
+            yourPokeTB6.PreviewKeyDown += yourPokeTB6_PreviewKeyDown;
 
             cSVReader = new CSVReader();
             cSVReader.Read("Resources/csv/PokemonData.csv");
@@ -72,16 +86,6 @@ namespace PokemonDamageTool
                 pokemonList.Add(pokemon);
             }
 
-            int a= pokemonList[0].RealNumberCalculation(1);
-
-            //pokemon1 = new Pokemon("ミミッキュ", 142, 100);
-            //pokemon2 = new Pokemon("ガブリアス", 182, 115);
-
-            //pokemonList.Add(pokemon1);
-            //pokemonList.Add(pokemon2);
-            
-            //attackPowerLabel.Text = pokemon1.Attack.ToString();
-            //defensePowerLabel.Text = pokemon2.Defense.ToString();
         }
 
 
@@ -95,7 +99,7 @@ namespace PokemonDamageTool
             {
                 return (int)num;
             }
-            
+
             return (int)(num + 1);
         }
 
@@ -113,10 +117,13 @@ namespace PokemonDamageTool
         }
 
         //ダメージ計算
-        private void DamageCalculation(int attack, int defense)
+        private void DamageCalculation()
         {
-            attackNum = attack;
-            defenseNum = defense;
+            if (attackPoke == null || defensePoke == null)
+                return;
+
+            attackNum = attackPoke.RealNumberCalculation(1);
+            defenseNum = defensePoke.RealNumberCalculation(2);
 
             int damageNum;
 
@@ -176,7 +183,7 @@ namespace PokemonDamageTool
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DamageCalculation(attackPoke.Attack, defensePoke.Defense);
+            DamageCalculation();
 
             damageLabel.Text = minDamage.ToString() + "～" + maxDamage.ToString();
 
@@ -184,9 +191,9 @@ namespace PokemonDamageTool
 
         private void damageLabel_Click(object sender, EventArgs e)
         {
-            
+
         }
-        
+
 
         private void sameTypeCB_CheckedChanged(object sender, EventArgs e)
         {
@@ -287,7 +294,7 @@ namespace PokemonDamageTool
                     return;
 
                 attackPokeLabel.Text = attackPoke.Name;
-                attackPowerLabel.Text = attackPoke.Attack.ToString();
+                attackPowerLabel.Text = attackPoke.RealNumberCalculation(1).ToString();
             }
         }
 
@@ -301,7 +308,7 @@ namespace PokemonDamageTool
                     return;
 
                 attackPokeLabel.Text = attackPoke.Name;
-                attackPowerLabel.Text = attackPoke.Attack.ToString();
+                attackPowerLabel.Text = attackPoke.RealNumberCalculation(1).ToString();
             }
         }
 
@@ -315,7 +322,7 @@ namespace PokemonDamageTool
                     return;
 
                 attackPokeLabel.Text = attackPoke.Name;
-                attackPowerLabel.Text = attackPoke.Attack.ToString();
+                attackPowerLabel.Text = attackPoke.RealNumberCalculation(1).ToString();
             }
         }
 
@@ -329,7 +336,7 @@ namespace PokemonDamageTool
                     return;
 
                 attackPokeLabel.Text = attackPoke.Name;
-                attackPowerLabel.Text = attackPoke.Attack.ToString();
+                attackPowerLabel.Text = attackPoke.RealNumberCalculation(1).ToString();
             }
         }
 
@@ -343,7 +350,7 @@ namespace PokemonDamageTool
                     return;
 
                 attackPokeLabel.Text = attackPoke.Name;
-                attackPowerLabel.Text = attackPoke.Attack.ToString();
+                attackPowerLabel.Text = attackPoke.RealNumberCalculation(1).ToString();
             }
         }
 
@@ -357,7 +364,7 @@ namespace PokemonDamageTool
                     return;
 
                 attackPokeLabel.Text = attackPoke.Name;
-                attackPowerLabel.Text = attackPoke.Attack.ToString();
+                attackPowerLabel.Text = attackPoke.RealNumberCalculation(1).ToString();
             }
         }
         #endregion
@@ -417,7 +424,7 @@ namespace PokemonDamageTool
                     return;
 
                 defensePokeLabel.Text = defensePoke.Name;
-                defensePowerLabel.Text = defensePoke.Defense.ToString();
+                defensePowerLabel.Text = defensePoke.RealNumberCalculation(2).ToString();
             }
         }
 
@@ -431,7 +438,7 @@ namespace PokemonDamageTool
                     return;
 
                 defensePokeLabel.Text = defensePoke.Name;
-                defensePowerLabel.Text = defensePoke.Defense.ToString();
+                defensePowerLabel.Text = defensePoke.RealNumberCalculation(2).ToString();
             }
         }
 
@@ -445,7 +452,7 @@ namespace PokemonDamageTool
                     return;
 
                 defensePokeLabel.Text = defensePoke.Name;
-                defensePowerLabel.Text = defensePoke.Defense.ToString();
+                defensePowerLabel.Text = defensePoke.RealNumberCalculation(2).ToString();
             }
         }
 
@@ -459,7 +466,7 @@ namespace PokemonDamageTool
                     return;
 
                 defensePokeLabel.Text = defensePoke.Name;
-                defensePowerLabel.Text = defensePoke.Defense.ToString();
+                defensePowerLabel.Text = defensePoke.RealNumberCalculation(2).ToString();
             }
         }
 
@@ -473,7 +480,7 @@ namespace PokemonDamageTool
                     return;
 
                 defensePokeLabel.Text = defensePoke.Name;
-                defensePowerLabel.Text = defensePoke.Defense.ToString();
+                defensePowerLabel.Text = defensePoke.RealNumberCalculation(2).ToString();
             }
         }
 
@@ -487,7 +494,7 @@ namespace PokemonDamageTool
                     return;
 
                 defensePokeLabel.Text = defensePoke.Name;
-                defensePowerLabel.Text = defensePoke.Defense.ToString();
+                defensePowerLabel.Text = defensePoke.RealNumberCalculation(2).ToString();
             }
         }
         #endregion
@@ -501,6 +508,205 @@ namespace PokemonDamageTool
         {
 
         }
-        
+
+        private void attackEVNumUD_ValueChanged(object sender, EventArgs e)
+        {
+            if (attackPoke == null)
+                return;
+
+            attackPoke.EffortValue = (int)attackEVNumUD.Value;
+            DamageCalculation();
+        }
+
+        private void defenseEVNumUD_ValueChanged(object sender, EventArgs e)
+        {
+            if (defensePoke == null)
+                return;
+
+            defensePoke.EffortValue = (int)defenseEVNumUD.Value;
+            DamageCalculation();
+        }
+
+        #region myPokeTB_PreviewKeyDownメソッド
+        private void myPokeTB1_PreviewKeyDown(object sender,PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Return:
+                    myPokeTB2.Focus();
+                    break;
+
+                //Tabキーが押されてもフォーカスが移動しないようにする
+                case Keys.Tab:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+
+        private void myPokeTB2_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Return:
+                    myPokeTB3.Focus();
+                    break;
+
+                //Tabキーが押されてもフォーカスが移動しないようにする
+                case Keys.Tab:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+        private void myPokeTB3_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Return:
+                    myPokeTB4.Focus();
+                    break;
+
+                //Tabキーが押されてもフォーカスが移動しないようにする
+                case Keys.Tab:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+
+        private void myPokeTB4_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Return:
+                    myPokeTB5.Focus();
+                    break;
+
+                //Tabキーが押されてもフォーカスが移動しないようにする
+                case Keys.Tab:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+
+        private void myPokeTB5_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Return:
+                    myPokeTB6.Focus();
+                    break;
+
+                //Tabキーが押されてもフォーカスが移動しないようにする
+                case Keys.Tab:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+
+        private void myPokeTB6_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Return:
+                    yourPokeTB1.Focus();
+                    break;
+
+                //Tabキーが押されてもフォーカスが移動しないようにする
+                case Keys.Tab:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+        #endregion
+
+        #region yourPokeTB_PreviewKeyDownメソッド
+        private void yourPokeTB1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Return:
+                    yourPokeTB2.Focus();
+                    break;
+
+                //Tabキーが押されてもフォーカスが移動しないようにする
+                case Keys.Tab:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+
+        private void yourPokeTB2_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Return:
+                    yourPokeTB3.Focus();
+                    break;
+
+                //Tabキーが押されてもフォーカスが移動しないようにする
+                case Keys.Tab:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+
+        private void yourPokeTB3_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Return:
+                    yourPokeTB4.Focus();
+                    break;
+
+                //Tabキーが押されてもフォーカスが移動しないようにする
+                case Keys.Tab:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+
+        private void yourPokeTB4_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Return:
+                    yourPokeTB5.Focus();
+                    break;
+
+                //Tabキーが押されてもフォーカスが移動しないようにする
+                case Keys.Tab:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+
+        private void yourPokeTB5_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Return:
+                    yourPokeTB6.Focus();
+                    break;
+
+                //Tabキーが押されてもフォーカスが移動しないようにする
+                case Keys.Tab:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+
+        private void yourPokeTB6_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                //case Keys.Return:
+                //    break;
+
+                //Tabキーが押されてもフォーカスが移動しないようにする
+                case Keys.Tab:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+        #endregion
     }
 }
