@@ -39,7 +39,6 @@
             this.defenseLabel = new System.Windows.Forms.Label();
             this.attackPowerLabel = new System.Windows.Forms.Label();
             this.defensePowerLabel = new System.Windows.Forms.Label();
-            this.myPartyGB = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.myPokeElectButton6 = new System.Windows.Forms.Button();
             this.myPokeElectButton5 = new System.Windows.Forms.Button();
@@ -56,34 +55,16 @@
             this.myPoke2Button = new System.Windows.Forms.Button();
             this.myPoke1Button = new System.Windows.Forms.Button();
             this.myPokeTB = new System.Windows.Forms.TextBox();
-            this.myPokeTB6 = new System.Windows.Forms.TextBox();
-            this.myPokeTB5 = new System.Windows.Forms.TextBox();
-            this.myPokeTB4 = new System.Windows.Forms.TextBox();
-            this.myPokeTB3 = new System.Windows.Forms.TextBox();
-            this.myPokeTB2 = new System.Windows.Forms.TextBox();
-            this.yourPartyGB = new System.Windows.Forms.GroupBox();
-            this.yourPokeRB6 = new System.Windows.Forms.RadioButton();
-            this.yourPokeTB6 = new System.Windows.Forms.TextBox();
-            this.yourPokeTB5 = new System.Windows.Forms.TextBox();
-            this.yourPokeRB5 = new System.Windows.Forms.RadioButton();
-            this.yourPokeTB4 = new System.Windows.Forms.TextBox();
-            this.yourPokeTB3 = new System.Windows.Forms.TextBox();
-            this.yourPokeRB4 = new System.Windows.Forms.RadioButton();
-            this.yourPokeTB2 = new System.Windows.Forms.TextBox();
-            this.yourPokeTB1 = new System.Windows.Forms.TextBox();
-            this.yourPokeRB3 = new System.Windows.Forms.RadioButton();
-            this.yourPokeRB1 = new System.Windows.Forms.RadioButton();
-            this.yourPokeRB2 = new System.Windows.Forms.RadioButton();
             this.attackPokeLabel = new System.Windows.Forms.Label();
             this.defensePokeLabel = new System.Windows.Forms.Label();
             this.attackPokeEVLabel = new System.Windows.Forms.Label();
             this.attackEVNumUD = new System.Windows.Forms.NumericUpDown();
             this.defenseEVNumUD = new System.Windows.Forms.NumericUpDown();
+            this.myPartyGB = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            this.myPartyGB.SuspendLayout();
-            this.yourPartyGB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.attackEVNumUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.defenseEVNumUD)).BeginInit();
+            this.myPartyGB.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -206,32 +187,6 @@
             this.defensePowerLabel.TabIndex = 18;
             this.defensePowerLabel.Text = "防御力";
             this.defensePowerLabel.Click += new System.EventHandler(this.defensePowerLabel_Click);
-            // 
-            // myPartyGB
-            // 
-            this.myPartyGB.Controls.Add(this.label2);
-            this.myPartyGB.Controls.Add(this.myPokeElectButton6);
-            this.myPartyGB.Controls.Add(this.myPokeElectButton5);
-            this.myPartyGB.Controls.Add(this.myPokeElectButton4);
-            this.myPartyGB.Controls.Add(this.myPokeElectButton3);
-            this.myPartyGB.Controls.Add(this.myPokeElectButton2);
-            this.myPartyGB.Controls.Add(this.myPokeElectButton1);
-            this.myPartyGB.Controls.Add(this.label1);
-            this.myPartyGB.Controls.Add(this.myPokeAbilityCB);
-            this.myPartyGB.Controls.Add(this.myPoke6Button);
-            this.myPartyGB.Controls.Add(this.myPoke5Button);
-            this.myPartyGB.Controls.Add(this.myPoke4Button);
-            this.myPartyGB.Controls.Add(this.myPoke3Button);
-            this.myPartyGB.Controls.Add(this.myPoke2Button);
-            this.myPartyGB.Controls.Add(this.myPoke1Button);
-            this.myPartyGB.Controls.Add(this.myPokeTB);
-            this.myPartyGB.Location = new System.Drawing.Point(28, 48);
-            this.myPartyGB.Name = "myPartyGB";
-            this.myPartyGB.Size = new System.Drawing.Size(271, 346);
-            this.myPartyGB.TabIndex = 22;
-            this.myPartyGB.TabStop = false;
-            this.myPartyGB.Text = "自分パーティ";
-            this.myPartyGB.Enter += new System.EventHandler(this.myPartyGB_Enter);
             // 
             // label2
             // 
@@ -389,177 +344,6 @@
             this.myPokeTB.TabIndex = 22;
             this.myPokeTB.TextChanged += new System.EventHandler(this.myPokeTB_TextChanged);
             // 
-            // myPokeTB6
-            // 
-            this.myPokeTB6.Location = new System.Drawing.Point(663, 488);
-            this.myPokeTB6.Name = "myPokeTB6";
-            this.myPokeTB6.Size = new System.Drawing.Size(100, 22);
-            this.myPokeTB6.TabIndex = 27;
-            // 
-            // myPokeTB5
-            // 
-            this.myPokeTB5.Location = new System.Drawing.Point(663, 443);
-            this.myPokeTB5.Name = "myPokeTB5";
-            this.myPokeTB5.Size = new System.Drawing.Size(100, 22);
-            this.myPokeTB5.TabIndex = 26;
-            // 
-            // myPokeTB4
-            // 
-            this.myPokeTB4.Location = new System.Drawing.Point(663, 398);
-            this.myPokeTB4.Name = "myPokeTB4";
-            this.myPokeTB4.Size = new System.Drawing.Size(100, 22);
-            this.myPokeTB4.TabIndex = 25;
-            // 
-            // myPokeTB3
-            // 
-            this.myPokeTB3.Location = new System.Drawing.Point(663, 353);
-            this.myPokeTB3.Name = "myPokeTB3";
-            this.myPokeTB3.Size = new System.Drawing.Size(100, 22);
-            this.myPokeTB3.TabIndex = 24;
-            // 
-            // myPokeTB2
-            // 
-            this.myPokeTB2.Location = new System.Drawing.Point(663, 308);
-            this.myPokeTB2.Name = "myPokeTB2";
-            this.myPokeTB2.Size = new System.Drawing.Size(100, 22);
-            this.myPokeTB2.TabIndex = 23;
-            // 
-            // yourPartyGB
-            // 
-            this.yourPartyGB.Controls.Add(this.yourPokeRB6);
-            this.yourPartyGB.Controls.Add(this.yourPokeTB6);
-            this.yourPartyGB.Controls.Add(this.yourPokeTB5);
-            this.yourPartyGB.Controls.Add(this.yourPokeRB5);
-            this.yourPartyGB.Controls.Add(this.yourPokeTB4);
-            this.yourPartyGB.Controls.Add(this.yourPokeTB3);
-            this.yourPartyGB.Controls.Add(this.yourPokeRB4);
-            this.yourPartyGB.Controls.Add(this.yourPokeTB2);
-            this.yourPartyGB.Controls.Add(this.yourPokeTB1);
-            this.yourPartyGB.Controls.Add(this.yourPokeRB3);
-            this.yourPartyGB.Controls.Add(this.yourPokeRB1);
-            this.yourPartyGB.Controls.Add(this.yourPokeRB2);
-            this.yourPartyGB.Location = new System.Drawing.Point(348, 48);
-            this.yourPartyGB.Name = "yourPartyGB";
-            this.yourPartyGB.Size = new System.Drawing.Size(204, 300);
-            this.yourPartyGB.TabIndex = 23;
-            this.yourPartyGB.TabStop = false;
-            this.yourPartyGB.Text = "相手パーティ";
-            this.yourPartyGB.Enter += new System.EventHandler(this.yourPartyGB_Enter);
-            // 
-            // yourPokeRB6
-            // 
-            this.yourPokeRB6.AutoSize = true;
-            this.yourPokeRB6.Location = new System.Drawing.Point(6, 262);
-            this.yourPokeRB6.Name = "yourPokeRB6";
-            this.yourPokeRB6.Size = new System.Drawing.Size(17, 16);
-            this.yourPokeRB6.TabIndex = 32;
-            this.yourPokeRB6.TabStop = true;
-            this.yourPokeRB6.UseVisualStyleBackColor = true;
-            this.yourPokeRB6.CheckedChanged += new System.EventHandler(this.yourPokeRB6_CheckedChanged);
-            // 
-            // yourPokeTB6
-            // 
-            this.yourPokeTB6.Location = new System.Drawing.Point(29, 261);
-            this.yourPokeTB6.Name = "yourPokeTB6";
-            this.yourPokeTB6.Size = new System.Drawing.Size(100, 22);
-            this.yourPokeTB6.TabIndex = 27;
-            this.yourPokeTB6.TextChanged += new System.EventHandler(this.yourPokeTB6_TextChanged);
-            // 
-            // yourPokeTB5
-            // 
-            this.yourPokeTB5.Location = new System.Drawing.Point(29, 216);
-            this.yourPokeTB5.Name = "yourPokeTB5";
-            this.yourPokeTB5.Size = new System.Drawing.Size(100, 22);
-            this.yourPokeTB5.TabIndex = 26;
-            this.yourPokeTB5.TextChanged += new System.EventHandler(this.yourPokeTB5_TextChanged);
-            // 
-            // yourPokeRB5
-            // 
-            this.yourPokeRB5.AutoSize = true;
-            this.yourPokeRB5.Location = new System.Drawing.Point(6, 218);
-            this.yourPokeRB5.Name = "yourPokeRB5";
-            this.yourPokeRB5.Size = new System.Drawing.Size(17, 16);
-            this.yourPokeRB5.TabIndex = 31;
-            this.yourPokeRB5.TabStop = true;
-            this.yourPokeRB5.UseVisualStyleBackColor = true;
-            this.yourPokeRB5.CheckedChanged += new System.EventHandler(this.yourPokeRB5_CheckedChanged);
-            // 
-            // yourPokeTB4
-            // 
-            this.yourPokeTB4.Location = new System.Drawing.Point(29, 171);
-            this.yourPokeTB4.Name = "yourPokeTB4";
-            this.yourPokeTB4.Size = new System.Drawing.Size(100, 22);
-            this.yourPokeTB4.TabIndex = 25;
-            this.yourPokeTB4.TextChanged += new System.EventHandler(this.yourPokeTB4_TextChanged);
-            // 
-            // yourPokeTB3
-            // 
-            this.yourPokeTB3.Location = new System.Drawing.Point(29, 126);
-            this.yourPokeTB3.Name = "yourPokeTB3";
-            this.yourPokeTB3.Size = new System.Drawing.Size(100, 22);
-            this.yourPokeTB3.TabIndex = 24;
-            this.yourPokeTB3.TextChanged += new System.EventHandler(this.yourPokeTB3_TextChanged);
-            // 
-            // yourPokeRB4
-            // 
-            this.yourPokeRB4.AutoSize = true;
-            this.yourPokeRB4.Location = new System.Drawing.Point(6, 172);
-            this.yourPokeRB4.Name = "yourPokeRB4";
-            this.yourPokeRB4.Size = new System.Drawing.Size(17, 16);
-            this.yourPokeRB4.TabIndex = 30;
-            this.yourPokeRB4.TabStop = true;
-            this.yourPokeRB4.UseVisualStyleBackColor = true;
-            this.yourPokeRB4.CheckedChanged += new System.EventHandler(this.yourPokeRB4_CheckedChanged);
-            // 
-            // yourPokeTB2
-            // 
-            this.yourPokeTB2.Location = new System.Drawing.Point(29, 81);
-            this.yourPokeTB2.Name = "yourPokeTB2";
-            this.yourPokeTB2.Size = new System.Drawing.Size(100, 22);
-            this.yourPokeTB2.TabIndex = 23;
-            this.yourPokeTB2.TextChanged += new System.EventHandler(this.yourPokeTB2_TextChanged);
-            // 
-            // yourPokeTB1
-            // 
-            this.yourPokeTB1.Location = new System.Drawing.Point(29, 36);
-            this.yourPokeTB1.Name = "yourPokeTB1";
-            this.yourPokeTB1.Size = new System.Drawing.Size(100, 22);
-            this.yourPokeTB1.TabIndex = 22;
-            this.yourPokeTB1.TextChanged += new System.EventHandler(this.yourPokeTB1_TextChanged);
-            // 
-            // yourPokeRB3
-            // 
-            this.yourPokeRB3.AutoSize = true;
-            this.yourPokeRB3.Location = new System.Drawing.Point(6, 128);
-            this.yourPokeRB3.Name = "yourPokeRB3";
-            this.yourPokeRB3.Size = new System.Drawing.Size(17, 16);
-            this.yourPokeRB3.TabIndex = 29;
-            this.yourPokeRB3.TabStop = true;
-            this.yourPokeRB3.UseVisualStyleBackColor = true;
-            this.yourPokeRB3.CheckedChanged += new System.EventHandler(this.yourPokeRB3_CheckedChanged);
-            // 
-            // yourPokeRB1
-            // 
-            this.yourPokeRB1.AutoSize = true;
-            this.yourPokeRB1.Location = new System.Drawing.Point(6, 38);
-            this.yourPokeRB1.Name = "yourPokeRB1";
-            this.yourPokeRB1.Size = new System.Drawing.Size(17, 16);
-            this.yourPokeRB1.TabIndex = 21;
-            this.yourPokeRB1.TabStop = true;
-            this.yourPokeRB1.UseVisualStyleBackColor = true;
-            this.yourPokeRB1.CheckedChanged += new System.EventHandler(this.yourPokeRB1_CheckedChanged);
-            // 
-            // yourPokeRB2
-            // 
-            this.yourPokeRB2.AutoSize = true;
-            this.yourPokeRB2.Location = new System.Drawing.Point(6, 82);
-            this.yourPokeRB2.Name = "yourPokeRB2";
-            this.yourPokeRB2.Size = new System.Drawing.Size(17, 16);
-            this.yourPokeRB2.TabIndex = 28;
-            this.yourPokeRB2.TabStop = true;
-            this.yourPokeRB2.UseVisualStyleBackColor = true;
-            this.yourPokeRB2.CheckedChanged += new System.EventHandler(this.yourPokeRB2_CheckedChanged);
-            // 
             // attackPokeLabel
             // 
             this.attackPokeLabel.AutoSize = true;
@@ -627,23 +411,45 @@
             this.defenseEVNumUD.TabIndex = 28;
             this.defenseEVNumUD.ValueChanged += new System.EventHandler(this.defenseEVNumUD_ValueChanged);
             // 
+            // myPartyGB
+            // 
+            this.myPartyGB.Controls.Add(this.label2);
+            this.myPartyGB.Controls.Add(this.myPokeElectButton6);
+            this.myPartyGB.Controls.Add(this.myPokeElectButton5);
+            this.myPartyGB.Controls.Add(this.myPokeElectButton4);
+            this.myPartyGB.Controls.Add(this.myPokeElectButton3);
+            this.myPartyGB.Controls.Add(this.myPokeElectButton2);
+            this.myPartyGB.Controls.Add(this.myPokeElectButton1);
+            this.myPartyGB.Controls.Add(this.label1);
+            this.myPartyGB.Controls.Add(this.myPokeAbilityCB);
+            this.myPartyGB.Controls.Add(this.myPoke6Button);
+            this.myPartyGB.Controls.Add(this.myPoke5Button);
+            this.myPartyGB.Controls.Add(this.myPoke4Button);
+            this.myPartyGB.Controls.Add(this.myPoke3Button);
+            this.myPartyGB.Controls.Add(this.myPoke2Button);
+            this.myPartyGB.Controls.Add(this.myPoke1Button);
+            this.myPartyGB.Controls.Add(this.myPokeTB);
+            this.myPartyGB.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.myPartyGB.Location = new System.Drawing.Point(151, 64);
+            this.myPartyGB.Name = "myPartyGB";
+            this.myPartyGB.Size = new System.Drawing.Size(288, 503);
+            this.myPartyGB.TabIndex = 22;
+            this.myPartyGB.TabStop = false;
+            this.myPartyGB.Text = "自分パーティ";
+            this.myPartyGB.Enter += new System.EventHandler(this.myPartyGB_Enter);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1262, 673);
             this.Controls.Add(this.defenseEVNumUD);
-            this.Controls.Add(this.myPokeTB6);
             this.Controls.Add(this.attackEVNumUD);
-            this.Controls.Add(this.myPokeTB5);
             this.Controls.Add(this.attackPokeEVLabel);
             this.Controls.Add(this.defensePokeLabel);
-            this.Controls.Add(this.myPokeTB4);
             this.Controls.Add(this.attackPokeLabel);
-            this.Controls.Add(this.myPokeTB3);
-            this.Controls.Add(this.yourPartyGB);
             this.Controls.Add(this.myPartyGB);
-            this.Controls.Add(this.myPokeTB2);
             this.Controls.Add(this.defensePowerLabel);
             this.Controls.Add(this.attackPowerLabel);
             this.Controls.Add(this.defenseLabel);
@@ -658,12 +464,10 @@
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            this.myPartyGB.ResumeLayout(false);
-            this.myPartyGB.PerformLayout();
-            this.yourPartyGB.ResumeLayout(false);
-            this.yourPartyGB.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.attackEVNumUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.defenseEVNumUD)).EndInit();
+            this.myPartyGB.ResumeLayout(false);
+            this.myPartyGB.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -681,26 +485,7 @@
         private System.Windows.Forms.Label defenseLabel;
         private System.Windows.Forms.Label attackPowerLabel;
         private System.Windows.Forms.Label defensePowerLabel;
-        private System.Windows.Forms.GroupBox myPartyGB;
-        private System.Windows.Forms.TextBox myPokeTB6;
-        private System.Windows.Forms.TextBox myPokeTB5;
-        private System.Windows.Forms.TextBox myPokeTB4;
-        private System.Windows.Forms.TextBox myPokeTB3;
-        private System.Windows.Forms.TextBox myPokeTB2;
         private System.Windows.Forms.TextBox myPokeTB;
-        private System.Windows.Forms.GroupBox yourPartyGB;
-        private System.Windows.Forms.RadioButton yourPokeRB6;
-        private System.Windows.Forms.RadioButton yourPokeRB5;
-        private System.Windows.Forms.RadioButton yourPokeRB4;
-        private System.Windows.Forms.RadioButton yourPokeRB3;
-        private System.Windows.Forms.RadioButton yourPokeRB2;
-        private System.Windows.Forms.TextBox yourPokeTB6;
-        private System.Windows.Forms.TextBox yourPokeTB5;
-        private System.Windows.Forms.TextBox yourPokeTB4;
-        private System.Windows.Forms.TextBox yourPokeTB3;
-        private System.Windows.Forms.TextBox yourPokeTB2;
-        private System.Windows.Forms.TextBox yourPokeTB1;
-        private System.Windows.Forms.RadioButton yourPokeRB1;
         private System.Windows.Forms.Label attackPokeLabel;
         private System.Windows.Forms.Label defensePokeLabel;
         private System.Windows.Forms.Label attackPokeEVLabel;
@@ -721,6 +506,7 @@
         private System.Windows.Forms.Button myPokeElectButton3;
         private System.Windows.Forms.Button myPokeElectButton2;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox myPartyGB;
     }
 }
 
