@@ -161,6 +161,8 @@ namespace PokemonDamageTool
 
             myPokeStatusDGV.Rows[0].ReadOnly = true;
             myPokeStatusDGV.Rows[3].ReadOnly = true;
+
+            myPokeStatusDGV.CellValueChanged += new DataGridViewCellEventHandler(myPokeStatusDGV_CellValueChanged);
             
         }
 
@@ -555,9 +557,25 @@ namespace PokemonDamageTool
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void myPokeStatusDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void myPokeStatusDGV_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+            int status = e.ColumnIndex;
+            int index = e.RowIndex;
+            string sValue = myPokeStatusDGV[status, index].Value.ToString();
+            int value = int.Parse(sValue);
+
+            if (myPokeStatusDGV[status, index].Selected)
+            {
+                myPoke.StatusUpdate(index, status - 1, value);
+                ChangePokemonStatusDGV(status, index, value);
+            }
+            
         }
 
         private void SetPokemonStatusDGV(Pokemon poke)
@@ -572,6 +590,12 @@ namespace PokemonDamageTool
                 }
             }
             
+        }
+
+        private void ChangePokemonStatusDGV(int status, int index, int value)
+        {
+            myPokeStatusDGV[status, index].Value = value;
+            myPokeStatusDGV[status, 3].Value = myPoke.RealValues[status - 1];
         }
 
         

@@ -469,7 +469,7 @@
             this.myPokeStatusDGV.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.myPokeStatusDGV.Size = new System.Drawing.Size(310, 144);
             this.myPokeStatusDGV.TabIndex = 70;
-            this.myPokeStatusDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.myPokeStatusDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.myPokeStatusDGV_CellContentClick);
             // 
             // Column0
             // 
