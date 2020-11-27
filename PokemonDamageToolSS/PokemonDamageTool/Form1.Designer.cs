@@ -61,10 +61,19 @@
             this.attackEVNumUD = new System.Windows.Forms.NumericUpDown();
             this.defenseEVNumUD = new System.Windows.Forms.NumericUpDown();
             this.myPartyGB = new System.Windows.Forms.GroupBox();
+            this.myPokeStatusDGV = new System.Windows.Forms.DataGridView();
+            this.Column0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.myH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.myA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.myB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.myC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.myD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.myS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.attackEVNumUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.defenseEVNumUD)).BeginInit();
             this.myPartyGB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.myPokeStatusDGV)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -338,7 +347,7 @@
             // 
             // myPokeTB
             // 
-            this.myPokeTB.Location = new System.Drawing.Point(87, 32);
+            this.myPokeTB.Location = new System.Drawing.Point(87, 25);
             this.myPokeTB.Name = "myPokeTB";
             this.myPokeTB.Size = new System.Drawing.Size(100, 22);
             this.myPokeTB.TabIndex = 22;
@@ -414,6 +423,7 @@
             // myPartyGB
             // 
             this.myPartyGB.Controls.Add(this.label2);
+            this.myPartyGB.Controls.Add(this.myPokeStatusDGV);
             this.myPartyGB.Controls.Add(this.myPokeElectButton6);
             this.myPartyGB.Controls.Add(this.myPokeElectButton5);
             this.myPartyGB.Controls.Add(this.myPokeElectButton4);
@@ -430,13 +440,88 @@
             this.myPartyGB.Controls.Add(this.myPoke1Button);
             this.myPartyGB.Controls.Add(this.myPokeTB);
             this.myPartyGB.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.myPartyGB.Location = new System.Drawing.Point(151, 64);
+            this.myPartyGB.Location = new System.Drawing.Point(27, 76);
             this.myPartyGB.Name = "myPartyGB";
-            this.myPartyGB.Size = new System.Drawing.Size(288, 503);
+            this.myPartyGB.Size = new System.Drawing.Size(333, 565);
             this.myPartyGB.TabIndex = 22;
             this.myPartyGB.TabStop = false;
             this.myPartyGB.Text = "自分パーティ";
             this.myPartyGB.Enter += new System.EventHandler(this.myPartyGB_Enter);
+            // 
+            // myPokeStatusDGV
+            // 
+            this.myPokeStatusDGV.AllowUserToAddRows = false;
+            this.myPokeStatusDGV.AllowUserToResizeColumns = false;
+            this.myPokeStatusDGV.AllowUserToResizeRows = false;
+            this.myPokeStatusDGV.ColumnHeadersHeight = 30;
+            this.myPokeStatusDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column0,
+            this.myH,
+            this.myA,
+            this.myB,
+            this.myC,
+            this.myD,
+            this.myS});
+            this.myPokeStatusDGV.Location = new System.Drawing.Point(9, 258);
+            this.myPokeStatusDGV.Name = "myPokeStatusDGV";
+            this.myPokeStatusDGV.RowHeadersVisible = false;
+            this.myPokeStatusDGV.RowTemplate.Height = 24;
+            this.myPokeStatusDGV.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.myPokeStatusDGV.Size = new System.Drawing.Size(310, 144);
+            this.myPokeStatusDGV.TabIndex = 70;
+            this.myPokeStatusDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // Column0
+            // 
+            this.Column0.Frozen = true;
+            this.Column0.HeaderText = "";
+            this.Column0.Name = "Column0";
+            this.Column0.ReadOnly = true;
+            this.Column0.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column0.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column0.Width = 44;
+            // 
+            // myH
+            // 
+            this.myH.HeaderText = "H";
+            this.myH.Name = "myH";
+            this.myH.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.myH.Width = 44;
+            // 
+            // myA
+            // 
+            this.myA.HeaderText = "A";
+            this.myA.Name = "myA";
+            this.myA.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.myA.Width = 44;
+            // 
+            // myB
+            // 
+            this.myB.HeaderText = "B";
+            this.myB.Name = "myB";
+            this.myB.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.myB.Width = 44;
+            // 
+            // myC
+            // 
+            this.myC.HeaderText = "C";
+            this.myC.Name = "myC";
+            this.myC.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.myC.Width = 44;
+            // 
+            // myD
+            // 
+            this.myD.HeaderText = "D";
+            this.myD.Name = "myD";
+            this.myD.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.myD.Width = 44;
+            // 
+            // myS
+            // 
+            this.myS.HeaderText = "S";
+            this.myS.Name = "myS";
+            this.myS.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.myS.Width = 44;
             // 
             // Form1
             // 
@@ -468,6 +553,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.defenseEVNumUD)).EndInit();
             this.myPartyGB.ResumeLayout(false);
             this.myPartyGB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.myPokeStatusDGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -507,6 +593,14 @@
         private System.Windows.Forms.Button myPokeElectButton2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox myPartyGB;
+        private System.Windows.Forms.DataGridView myPokeStatusDGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column0;
+        private System.Windows.Forms.DataGridViewTextBoxColumn myH;
+        private System.Windows.Forms.DataGridViewTextBoxColumn myA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn myB;
+        private System.Windows.Forms.DataGridViewTextBoxColumn myC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn myD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn myS;
     }
 }
 

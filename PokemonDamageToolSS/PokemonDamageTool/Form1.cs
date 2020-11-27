@@ -22,6 +22,10 @@ namespace PokemonDamageTool
 
         private int maxDamage;
 
+        private Pokemon myPoke;
+
+        private Pokemon yourPoke;
+
         private Pokemon attackPoke;
 
         private Pokemon defensePoke;
@@ -36,6 +40,8 @@ namespace PokemonDamageTool
 
         private Pokemon[] yourPokeArray;
 
+        string[] states = new string[4];
+
         //データ用
         private List<Pokemon> pokemonList;
 
@@ -46,6 +52,8 @@ namespace PokemonDamageTool
             InitializeComponent();
 
             Initialize();
+
+            InitializeDGV();
 
             attackNum = 0;
 
@@ -61,8 +69,11 @@ namespace PokemonDamageTool
         private void Initialize()
         {
             myPokeArray = new Pokemon[6];
-            
+
             yourPokeArray = new Pokemon[6];
+
+            states = new string[4]
+                {"種族","個体","努力","実数"};
 
             //myPokeTB1.PreviewKeyDown += myPokeTB1_PreviewKeyDown;
             //myPokeTB2.PreviewKeyDown += myPokeTB2_PreviewKeyDown;
@@ -127,6 +138,30 @@ namespace PokemonDamageTool
                 pokemonList.Add(pokemon);
             }
 
+
+        }
+
+        private void InitializeDGV()
+        {
+            //中央揃え
+            for (int i = 0; i < 7; i++)
+            {
+                myPokeStatusDGV.Columns[i].DefaultCellStyle.Alignment =
+                DataGridViewContentAlignment.MiddleCenter;
+                myPokeStatusDGV.Columns[i].HeaderCell.Style.Alignment =
+                DataGridViewContentAlignment.MiddleCenter;
+            }
+            
+
+            for (int i = 0; i < 4; i++)
+            {
+                myPokeStatusDGV.Rows.Add(states[i]);
+                myPokeStatusDGV.Rows[i].Height = 28;
+            }
+
+            myPokeStatusDGV.Rows[0].ReadOnly = true;
+            myPokeStatusDGV.Rows[3].ReadOnly = true;
+            
         }
 
 
@@ -218,7 +253,7 @@ namespace PokemonDamageTool
 
         private void PartyInput(Pokemon pokemon, Pokemon[] party)
         {
-            
+
             int i = 0;
 
             foreach (var poke in party)
@@ -319,7 +354,7 @@ namespace PokemonDamageTool
         {
 
         }
-        
+
 
 
         private void attackPokeLabel_Click(object sender, EventArgs e)
@@ -366,14 +401,15 @@ namespace PokemonDamageTool
             if (index > -1)
             {
                 attackPoke = myPokeArray[index];
+                myPoke= myPokeArray[index];
 
-                if (attackPoke == null)
+                if (myPoke == null)
                     return;
 
                 string[] abilities = new string[3];
-                abilities[0] = attackPoke.Ability1;
-                abilities[1] = attackPoke.Ability2;
-                abilities[2] = attackPoke.HiddenAbility;
+                abilities[0] = myPoke.Ability1;
+                abilities[1] = myPoke.Ability2;
+                abilities[2] = myPoke.HiddenAbility;
 
                 myPokeAbilityCB.Items.Clear();
 
@@ -384,13 +420,15 @@ namespace PokemonDamageTool
                     {
                         myPokeAbilityCB.Items.Add(abilities[i]);
 
-                        if (attackPoke.CurrentAbility == abilities[i])
+                        if (myPoke.CurrentAbility == abilities[i])
                         {
                             myPokeAbilityCB.SelectedIndex = i;
                         }
                     }
 
                 }
+                
+                SetPokemonStatusDGV(myPoke);
 
 
                 attackPokeLabel.Text = attackPoke.Name;
@@ -401,68 +439,26 @@ namespace PokemonDamageTool
 
         private void myPoke1Button_Click(object sender, EventArgs e)
         {
-            //attackPoke = myPokeArray[0];
-
-            //if (attackPoke == null)
-            //    return;
-
-            //attackPokeLabel.Text = attackPoke.Name;
-            //attackPowerLabel.Text = attackPoke.RealNumberCalculation(1).ToString();
         }
 
         private void myPoke2Button_Click(object sender, EventArgs e)
         {
-            //attackPoke = myPokeArray[1];
-
-            //if (attackPoke == null)
-            //    return;
-
-            //attackPokeLabel.Text = attackPoke.Name;
-            //attackPowerLabel.Text = attackPoke.RealNumberCalculation(1).ToString();
         }
 
         private void myPoke3Button_Click(object sender, EventArgs e)
         {
-            //attackPoke = myPokeArray[2];
-
-            //if (attackPoke == null)
-            //    return;
-
-            //attackPokeLabel.Text = attackPoke.Name;
-            //attackPowerLabel.Text = attackPoke.RealNumberCalculation(1).ToString();
         }
 
         private void myPoke4Button_Click(object sender, EventArgs e)
         {
-            //attackPoke = myPokeArray[3];
-
-            //if (attackPoke == null)
-            //    return;
-
-            //attackPokeLabel.Text = attackPoke.Name;
-            //attackPowerLabel.Text = attackPoke.RealNumberCalculation(1).ToString();
         }
 
         private void myPoke5Button_Click(object sender, EventArgs e)
         {
-            //attackPoke = myPokeArray[4];
-
-            //if (attackPoke == null)
-            //    return;
-
-            //attackPokeLabel.Text = attackPoke.Name;
-            //attackPowerLabel.Text = attackPoke.RealNumberCalculation(1).ToString();
         }
 
         private void myPoke6Button_Click(object sender, EventArgs e)
         {
-            //attackPoke = myPokeArray[5];
-
-            //if (attackPoke == null)
-            //    return;
-
-            //attackPokeLabel.Text = attackPoke.Name;
-            //attackPowerLabel.Text = attackPoke.RealNumberCalculation(1).ToString();
         }
 
         private void MyPokeElectButton_Click(object sender, EventArgs e)
@@ -478,7 +474,7 @@ namespace PokemonDamageTool
                 }
             }
 
-            
+
             if (index > -1)
             {
                 if (myPokeElectButtons[index].Text == "")
@@ -500,7 +496,7 @@ namespace PokemonDamageTool
 
         private void myPokeElectButton1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void myPokeElectButton2_Click(object sender, EventArgs e)
@@ -510,7 +506,7 @@ namespace PokemonDamageTool
 
         private void myPokeElectButton3_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void myPokeElectButton4_Click(object sender, EventArgs e)
@@ -530,7 +526,7 @@ namespace PokemonDamageTool
 
         private void myPokeAbility_SelectedIndexChanged(object sender, EventArgs e)
         {
-            attackPoke.CurrentAbility = myPokeAbilityCB.Text;
+            myPoke.CurrentAbility = myPokeAbilityCB.Text;
         }
 
         private void myPokeTB_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -542,7 +538,7 @@ namespace PokemonDamageTool
                     var poke = SearchPokemonName(pokeName, myPokeTB);
                     PartyInput(poke, myPokeArray);
                     break;
-                    
+
             }
         }
 
@@ -558,6 +554,26 @@ namespace PokemonDamageTool
 
             }
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void SetPokemonStatusDGV(Pokemon poke)
+        {
+            for (int i = 1; i < 5; i++)
+            {
+                for (int j = 1; j < 7; j++)
+                {
+                    var value = poke.Statuses[i-1][j-1].ToString();
+                    
+                    myPokeStatusDGV[j, i-1].Value = value;
+                }
+            }
+            
+        }
+
         
     }
 }

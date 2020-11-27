@@ -31,6 +31,11 @@ namespace PokemonDamageTool
         //努力値
         private int[] effortValues;
 
+        //
+        private int[] realValues;
+
+        private List<int[]> statuses;
+
         private int level;
 
         //コンストラクタ
@@ -49,6 +54,9 @@ namespace PokemonDamageTool
         public int[] IndividualValues { get => individualValues; set => individualValues = value; }
         public int[] EffortValues { get => effortValues; set => effortValues = value; }
         public string CurrentAbility { get => currentAbility; set => currentAbility = value; }
+        public int[] BaseStatus { get => baseStatus; set => baseStatus = value; }
+        public int[] RealValues { get => realValues; set => realValues = value; }
+        public List<int[]> Statuses { get => statuses; set => statuses = value; }
 
         public void Initialize(string[] data)
         {
@@ -76,6 +84,18 @@ namespace PokemonDamageTool
 
             effortValues = new int[6] 
                 { 0, 0, 0, 0, 0, 0 };
+
+            realValues = new int[6];
+            for (int i = 0; i < realValues.Length; i++)
+            {
+                realValues[i] = RealNumberCalculation(i);
+            }
+
+            statuses = new List<int[]>();
+            statuses.Add(baseStatus);
+            statuses.Add(individualValues);
+            statuses.Add(effortValues);
+            statuses.Add(realValues);
         }
         
         //実数値計算
@@ -94,6 +114,19 @@ namespace PokemonDamageTool
             }
 
             return 0;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="status">3値配列</param>
+        /// <param name="index">HABCDS</param>
+        /// <param name="value">変更</param>
+        public void StatusUpdate(int status, int index, int value)
+        {
+            statuses[status][index] = value;
+
+            realValues[index] = RealNumberCalculation(index);
         }
     }
 }
