@@ -163,7 +163,11 @@ namespace PokemonDamageTool
             myPokeStatusDGV.Rows[3].ReadOnly = true;
 
             myPokeStatusDGV.CellValueChanged += new DataGridViewCellEventHandler(myPokeStatusDGV_CellValueChanged);
-            
+
+            myPokeStatusDGV.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(PokeStatusDGV_EditingControlShowing);
+
+            myPokeStatusDGV.ImeMode = ImeMode.Disable;
+
         }
 
 
@@ -564,11 +568,19 @@ namespace PokemonDamageTool
 
         private void myPokeStatusDGV_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            if (myPoke == null)
+                return;
 
             int status = e.ColumnIndex;
             int index = e.RowIndex;
             string sValue = myPokeStatusDGV[status, index].Value.ToString();
             int value = int.Parse(sValue);
+
+            if (value < 0)
+                value = 0;
+
+            if (value > 252)
+                value = 252;
 
             if (myPokeStatusDGV[status, index].Selected)
             {
@@ -596,6 +608,41 @@ namespace PokemonDamageTool
         {
             myPokeStatusDGV[status, index].Value = value;
             myPokeStatusDGV[status, 3].Value = myPoke.RealValues[status - 1];
+        }
+
+        private void PokeStatusDGV_EditingControlShowing(object sender,DataGridViewEditingControlShowingEventArgs e)
+        {
+            //表示されているコントロールがDataGridViewTextBoxEditingControlか調べる
+            if (e.Control is DataGridViewTextBoxEditingControl)
+            {
+                DataGridView dgv = (DataGridView)sender;
+
+                //編集のために表示されているコントロールを取得
+                DataGridViewTextBoxEditingControl tb =
+                    (DataGridViewTextBoxEditingControl)e.Control;
+
+                //イベントハンドラを削除
+                tb.KeyPress -=
+                    new KeyPressEventHandler(PokeStatusDGVTextBox_KeyPress);
+
+                //該当する列か調べる
+                //if (dgv.CurrentCell.OwningColumn.Name == "Column1")
+                //{
+                    //KeyPressイベントハンドラを追加
+                    tb.KeyPress +=
+                        new KeyPressEventHandler(PokeStatusDGVTextBox_KeyPress);
+                //}
+            }
+        }
+
+        
+        private void PokeStatusDGVTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0-9の文字orバックスペースのみ
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
         }
 
         
