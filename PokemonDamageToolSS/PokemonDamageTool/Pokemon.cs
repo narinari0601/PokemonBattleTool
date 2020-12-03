@@ -31,8 +31,10 @@ namespace PokemonDamageTool
         //努力値
         private int[] effortValues;
 
-        //
+        //実数値
         private int[] realValues;
+
+        private int[] statusLanks;
 
         private List<int[]> statuses;
 
@@ -41,7 +43,7 @@ namespace PokemonDamageTool
         //コンストラクタ
         public Pokemon()
         {
-
+            
         }
 
         public string Name { get => name; set => name = value; }
@@ -57,6 +59,7 @@ namespace PokemonDamageTool
         public int[] BaseStatus { get => baseStatus; set => baseStatus = value; }
         public int[] RealValues { get => realValues; set => realValues = value; }
         public List<int[]> Statuses { get => statuses; set => statuses = value; }
+        public int[] StatusLanks { get => statusLanks; set => statusLanks = value; }
 
         public void Initialize(string[] data)
         {
@@ -90,6 +93,9 @@ namespace PokemonDamageTool
             {
                 realValues[i] = RealNumberCalculation(i);
             }
+
+            statusLanks = new int[5]
+                {0,0,0,0,0 };
 
             statuses = new List<int[]>();
             statuses.Add(baseStatus);

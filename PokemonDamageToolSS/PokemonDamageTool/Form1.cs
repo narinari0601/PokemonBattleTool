@@ -22,23 +22,26 @@ namespace PokemonDamageTool
 
         private int maxDamage;
 
-        private Pokemon myPoke;
+        private Pokemon[] currentPokes;
 
-        private Pokemon yourPoke;
+        private TextBox[] pokeTextBoxes;
 
         private Pokemon attackPoke;
 
         private Pokemon defensePoke;
 
-        private Pokemon[] myPokeArray;
+        private List<Pokemon[]> partyList;
 
-        private Button[] myPokeButtons;
+        private List<Button[]> pokeButtons;
 
-        private Button[] myPokeElectButtons;
+        private List<Button[]> pokeElectButtonList;
 
-        private bool[] myPokeElects;
+        private List<bool[]> pokeElectList;
 
-        private Pokemon[] yourPokeArray;
+        private ComboBox[] abilityCBs;
+
+        //-1=null 0=自分 1=相手
+        private int currentGroupBoxNum;
 
         string[] states = new string[4];
 
@@ -47,14 +50,24 @@ namespace PokemonDamageTool
 
         private CSVReader cSVReader;
 
+
+        PokemonStatusDGV statusDGV;
+
         public Form1()
         {
             InitializeComponent();
 
             Initialize();
 
-            InitializeDGV();
+            PokeDataInitialize();
 
+            statusDGV = new PokemonStatusDGV(myPokeStatusDGV, yourPokeStatusDGV);
+            statusDGV.Initialize();
+            
+        }
+
+        private void Initialize()
+        {
             attackNum = 0;
 
             defenseNum = 0;
@@ -64,65 +77,108 @@ namespace PokemonDamageTool
             minDamage = 0;
 
             maxDamage = 0;
-        }
 
-        private void Initialize()
-        {
-            myPokeArray = new Pokemon[6];
+            currentGroupBoxNum = -1;
 
-            yourPokeArray = new Pokemon[6];
+            partyList = new List<Pokemon[]>();
+            partyList.Add(new Pokemon[6]);
+            partyList.Add(new Pokemon[6]);
+
+            currentPokes = new Pokemon[2];
 
             states = new string[4]
                 {"種族","個体","努力","実数"};
+            
 
-            //myPokeTB1.PreviewKeyDown += myPokeTB1_PreviewKeyDown;
-            //myPokeTB2.PreviewKeyDown += myPokeTB2_PreviewKeyDown;
-            //myPokeTB3.PreviewKeyDown += myPokeTB3_PreviewKeyDown;
-            //myPokeTB4.PreviewKeyDown += myPokeTB4_PreviewKeyDown;
-            //myPokeTB5.PreviewKeyDown += myPokeTB5_PreviewKeyDown;
-            //myPokeTB6.PreviewKeyDown += myPokeTB6_PreviewKeyDown;
+            myPokeTB.PreviewKeyDown += PokeTB_PreviewKeyDown;
+            yourPokeTB.PreviewKeyDown += PokeTB_PreviewKeyDown;
 
-            //yourPokeTB1.PreviewKeyDown += yourPokeTB1_PreviewKeyDown;
-            //yourPokeTB2.PreviewKeyDown += yourPokeTB2_PreviewKeyDown;
-            //yourPokeTB3.PreviewKeyDown += yourPokeTB3_PreviewKeyDown;
-            //yourPokeTB4.PreviewKeyDown += yourPokeTB4_PreviewKeyDown;
-            //yourPokeTB5.PreviewKeyDown += yourPokeTB5_PreviewKeyDown;
-            //yourPokeTB6.PreviewKeyDown += yourPokeTB6_PreviewKeyDown;
+            pokeTextBoxes = new TextBox[2]
+                {myPokeTB,yourPokeTB };
 
-            myPokeTB.PreviewKeyDown += myPokeTB_PreviewKeyDown;
+            pokeButtons = new List<Button[]>();
+            pokeButtons.Add(
+                new Button[6]
+                {
+                    myPokeButton1,
+                    myPokeButton2,
+                    myPokeButton3,
+                    myPokeButton4,
+                    myPokeButton5,
+                    myPokeButton6
+                });
 
-            myPokeButtons = new Button[6];
-            myPokeButtons[0] = myPoke1Button;
-            myPokeButtons[1] = myPoke2Button;
-            myPokeButtons[2] = myPoke3Button;
-            myPokeButtons[3] = myPoke4Button;
-            myPokeButtons[4] = myPoke5Button;
-            myPokeButtons[5] = myPoke6Button;
+            pokeButtons.Add(
+                new Button[6]
+                {
+                    yourPokeButton1,
+                    yourPokeButton2,
+                    yourPokeButton3,
+                    yourPokeButton4,
+                    yourPokeButton5,
+                    yourPokeButton6
+                });
 
-            for (int i = 0; i < myPokeButtons.Length; i++)
+            for (int i = 0; i < pokeButtons.Count; i++)
             {
-                myPokeButtons[i].Click += new EventHandler(MyPokeButton_Click);
+                for (int j = 0; j < pokeButtons[i].Length; j++)
+                {
+                    pokeButtons[i][j].Click += new EventHandler(PokeButton_Click);
+                }
             }
 
-            myPokeElectButtons = new Button[6];
-            myPokeElectButtons[0] = myPokeElectButton1;
-            myPokeElectButtons[1] = myPokeElectButton2;
-            myPokeElectButtons[2] = myPokeElectButton3;
-            myPokeElectButtons[3] = myPokeElectButton4;
-            myPokeElectButtons[4] = myPokeElectButton5;
-            myPokeElectButtons[5] = myPokeElectButton6;
+            pokeElectButtonList = new List<Button[]>();
+            pokeElectButtonList.Add(
+                new Button[6]
+                {   myPokeElectButton1,
+                    myPokeElectButton2,
+                    myPokeElectButton3,
+                    myPokeElectButton4,
+                    myPokeElectButton5,
+                    myPokeElectButton6
+                });
 
-            for (int i = 0; i < myPokeElectButtons.Length; i++)
+            pokeElectButtonList.Add(
+                new Button[6]
+                {   yourPokeElectButton1,
+                    yourPokeElectButton2,
+                    yourPokeElectButton3,
+                    yourPokeElectButton4,
+                    yourPokeElectButton5,
+                    yourPokeElectButton6
+                });
+
+            for (int i = 0; i < pokeElectButtonList.Count; i++)
             {
-                myPokeElectButtons[i].Click += new EventHandler(MyPokeElectButton_Click);
+                for (int j = 0; j < pokeElectButtonList[i].Length; j++)
+                {
+                    pokeElectButtonList[i][j].Click += new EventHandler(MyPokeElectButton_Click);
+                }
             }
 
-            myPokeElects = new bool[3];
-            for (int i = 0; i < myPokeElects.Length; i++)
-            {
-                myPokeElects[i] = false;
-            }
 
+            pokeElectList = new List<bool[]>();
+
+            for (int i = 0; i < 2; i++)
+            {
+                pokeElectList.Add(
+                new bool[3]
+                {
+                    false,
+                    false,
+                    false
+                });
+            }
+            
+
+
+            abilityCBs = new ComboBox[2]
+                {myPokeAbilityCB,yourPokeAbilityCB };
+
+        }
+
+        private void PokeDataInitialize()
+        {
             cSVReader = new CSVReader();
             cSVReader.Read("Resources/csv/PokemonData.csv");
 
@@ -137,39 +193,7 @@ namespace PokemonDamageTool
 
                 pokemonList.Add(pokemon);
             }
-
-
         }
-
-        private void InitializeDGV()
-        {
-            //中央揃え
-            for (int i = 0; i < 7; i++)
-            {
-                myPokeStatusDGV.Columns[i].DefaultCellStyle.Alignment =
-                DataGridViewContentAlignment.MiddleCenter;
-                myPokeStatusDGV.Columns[i].HeaderCell.Style.Alignment =
-                DataGridViewContentAlignment.MiddleCenter;
-            }
-            
-
-            for (int i = 0; i < 4; i++)
-            {
-                myPokeStatusDGV.Rows.Add(states[i]);
-                myPokeStatusDGV.Rows[i].Height = 28;
-            }
-
-            myPokeStatusDGV.Rows[0].ReadOnly = true;
-            myPokeStatusDGV.Rows[3].ReadOnly = true;
-
-            myPokeStatusDGV.CellValueChanged += new DataGridViewCellEventHandler(myPokeStatusDGV_CellValueChanged);
-
-            myPokeStatusDGV.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(PokeStatusDGV_EditingControlShowing);
-
-            myPokeStatusDGV.ImeMode = ImeMode.Disable;
-
-        }
-
 
         //五捨五超入
         private int RoundedOver(float num)
@@ -267,7 +291,7 @@ namespace PokemonDamageTool
                 if (poke == null)
                 {
                     party[i] = pokemon;
-                    return;
+                    break;
                 }
                 i++;
             }
@@ -278,11 +302,11 @@ namespace PokemonDamageTool
         {
             int index = 0;
 
-            foreach (var num in myPokeElects)
+            foreach (var num in pokeElectList[currentGroupBoxNum])
             {
                 if (num == false)
                 {
-                    myPokeElects[index] = true;
+                    pokeElectList[currentGroupBoxNum][index] = true;
                     return index + 1;
                 }
                 index++;
@@ -305,73 +329,14 @@ namespace PokemonDamageTool
             damageLabel.Text = minDamage.ToString() + "～" + maxDamage.ToString();
 
         }
-
-        private void damageLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void sameTypeCB_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void supperEffectiveCB_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void notVeryEffectiveCB_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void attackPoke_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void defensePokeLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void attackPowerLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void defensePowerLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void myPartyGB_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void yourPartyGB_Enter(object sender, EventArgs e)
-        {
-
-        }
+        
+        
+        
         private void myPokeTB_TextChanged(object sender, EventArgs e)
         {
 
         }
-
-
-
-        private void attackPokeLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void defensePokeLabel_Click_1(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void attackEVNumUD_ValueChanged(object sender, EventArgs e)
         {
@@ -391,13 +356,13 @@ namespace PokemonDamageTool
             DamageCalculation();
         }
 
-        private void MyPokeButton_Click(object sender, EventArgs e)
+        private void PokeButton_Click(object sender, EventArgs e)
         {
             //クリックされたボタンのインデックス番号を取得する
             int index = -1;
-            for (int i = 0; i < myPokeElectButtons.Length; i++)
+            for (int i = 0; i < 6; i++)
             {
-                if (myPokeButtons[i].Equals(sender))
+                if (pokeButtons[currentGroupBoxNum][i].Equals(sender))
                 {
                     index = i;
                     break;
@@ -406,74 +371,55 @@ namespace PokemonDamageTool
 
             if (index > -1)
             {
-                attackPoke = myPokeArray[index];
-                myPoke= myPokeArray[index];
+                attackPoke = partyList[currentGroupBoxNum][index];
 
-                if (myPoke == null)
+                var poke= partyList[currentGroupBoxNum][index];
+                currentPokes[currentGroupBoxNum] = poke;
+                
+
+                if (poke == null)
                     return;
 
                 string[] abilities = new string[3];
-                abilities[0] = myPoke.Ability1;
-                abilities[1] = myPoke.Ability2;
-                abilities[2] = myPoke.HiddenAbility;
+                abilities[0] = poke.Ability1;
+                abilities[1] = poke.Ability2;
+                abilities[2] = poke.HiddenAbility;
 
-                myPokeAbilityCB.Items.Clear();
+                abilityCBs[currentGroupBoxNum].Items.Clear();
 
 
                 for (int i = 0; i < abilities.Length; i++)
                 {
                     if (abilities[i] != "")
                     {
-                        myPokeAbilityCB.Items.Add(abilities[i]);
+                        abilityCBs[currentGroupBoxNum].Items.Add(abilities[i]);
 
-                        if (myPoke.CurrentAbility == abilities[i])
+                        if (poke.CurrentAbility == abilities[i])
                         {
-                            myPokeAbilityCB.SelectedIndex = i;
+                            abilityCBs[currentGroupBoxNum].SelectedIndex = i;
                         }
                     }
 
                 }
                 
-                SetPokemonStatusDGV(myPoke);
+                statusDGV.SetPokemonStatusDGV(currentPokes[currentGroupBoxNum],currentGroupBoxNum);
 
 
-                attackPokeLabel.Text = attackPoke.Name;
-                attackPowerLabel.Text = attackPoke.RealNumberCalculation(1).ToString();
+                //attackPokeLabel.Text = attackPoke.Name;
+                //attackPowerLabel.Text = attackPoke.RealNumberCalculation(1).ToString();
 
             }
         }
-
-        private void myPoke1Button_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void myPoke2Button_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void myPoke3Button_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void myPoke4Button_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void myPoke5Button_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void myPoke6Button_Click(object sender, EventArgs e)
-        {
-        }
+        
+        
 
         private void MyPokeElectButton_Click(object sender, EventArgs e)
         {
             //クリックされたボタンのインデックス番号を取得する
             int index = -1;
-            for (int i = 0; i < myPokeElectButtons.Length; i++)
+            for (int i = 0; i < pokeElectButtonList[currentGroupBoxNum].Length; i++)
             {
-                if (myPokeElectButtons[i].Equals(sender))
+                if (pokeElectButtonList[currentGroupBoxNum][i].Equals(sender))
                 {
                     index = i;
                     break;
@@ -483,79 +429,39 @@ namespace PokemonDamageTool
 
             if (index > -1)
             {
-                if (myPokeElectButtons[index].Text == "")
+                if (pokeElectButtonList[currentGroupBoxNum][index].Text == "")
                 {
                     var num = PokemonElection();
                     if (num == 0)
                         return;
-                    myPokeElectButtons[index].Text = num.ToString();
+                    pokeElectButtonList[currentGroupBoxNum][index].Text = num.ToString();
                 }
 
+                //数字を消すパターン
                 else
                 {
-                    int num = int.Parse(myPokeElectButtons[index].Text);
-                    myPokeElects[num - 1] = false;
-                    myPokeElectButtons[index].ResetText();
+                    int num = int.Parse(pokeElectButtonList[currentGroupBoxNum][index].Text);
+                    pokeElectList[currentGroupBoxNum][num - 1] = false;
+                    pokeElectButtonList[currentGroupBoxNum][index].ResetText();
                 }
             }
         }
-
-        private void myPokeElectButton1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void myPokeElectButton2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void myPokeElectButton3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void myPokeElectButton4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void myPokeElectButton5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void myPokeElectButton6_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void myPokeAbility_SelectedIndexChanged(object sender, EventArgs e)
         {
-            myPoke.CurrentAbility = myPokeAbilityCB.Text;
+            currentPokes[currentGroupBoxNum].CurrentAbility = abilityCBs[currentGroupBoxNum].Text;
         }
 
-        private void myPokeTB_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        private void PokeTB_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             switch (e.KeyCode)
             {
                 case Keys.Return:
-                    var pokeName = myPokeTB.Text;
-                    var poke = SearchPokemonName(pokeName, myPokeTB);
-                    PartyInput(poke, myPokeArray);
-                    break;
-
-            }
-        }
-
-        private void yourPokeTB_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.Return:
-                    var pokeName = myPokeTB.Text;
-                    //var poke = SearchPokemonName(pokeName, yourPokeTB);
-                    //PartyInput(poke, myPokeArray);
+                    var currentTB = pokeTextBoxes[currentGroupBoxNum];
+                    var pokeName = currentTB.Text;
+                    var poke = SearchPokemonName(pokeName, currentTB);
+                    PartyInput(poke, partyList[currentGroupBoxNum]);
                     break;
 
             }
@@ -565,86 +471,26 @@ namespace PokemonDamageTool
         {
 
         }
-
-        private void myPokeStatusDGV_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (myPoke == null)
-                return;
-
-            int status = e.ColumnIndex;
-            int index = e.RowIndex;
-            string sValue = myPokeStatusDGV[status, index].Value.ToString();
-            int value = int.Parse(sValue);
-
-            if (value < 0)
-                value = 0;
-
-            if (value > 252)
-                value = 252;
-
-            if (myPokeStatusDGV[status, index].Selected)
-            {
-                myPoke.StatusUpdate(index, status - 1, value);
-                ChangePokemonStatusDGV(status, index, value);
-            }
-            
-        }
-
-        private void SetPokemonStatusDGV(Pokemon poke)
-        {
-            for (int i = 1; i < 5; i++)
-            {
-                for (int j = 1; j < 7; j++)
-                {
-                    var value = poke.Statuses[i-1][j-1].ToString();
-                    
-                    myPokeStatusDGV[j, i-1].Value = value;
-                }
-            }
-            
-        }
-
-        private void ChangePokemonStatusDGV(int status, int index, int value)
-        {
-            myPokeStatusDGV[status, index].Value = value;
-            myPokeStatusDGV[status, 3].Value = myPoke.RealValues[status - 1];
-        }
-
-        private void PokeStatusDGV_EditingControlShowing(object sender,DataGridViewEditingControlShowingEventArgs e)
-        {
-            //表示されているコントロールがDataGridViewTextBoxEditingControlか調べる
-            if (e.Control is DataGridViewTextBoxEditingControl)
-            {
-                DataGridView dgv = (DataGridView)sender;
-
-                //編集のために表示されているコントロールを取得
-                DataGridViewTextBoxEditingControl tb =
-                    (DataGridViewTextBoxEditingControl)e.Control;
-
-                //イベントハンドラを削除
-                tb.KeyPress -=
-                    new KeyPressEventHandler(PokeStatusDGVTextBox_KeyPress);
-
-                //該当する列か調べる
-                //if (dgv.CurrentCell.OwningColumn.Name == "Column1")
-                //{
-                    //KeyPressイベントハンドラを追加
-                    tb.KeyPress +=
-                        new KeyPressEventHandler(PokeStatusDGVTextBox_KeyPress);
-                //}
-            }
-        }
-
         
-        private void PokeStatusDGVTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        
+
+        private void myALankNUD_ValueChanged(object sender, EventArgs e)
         {
-            //0-9の文字orバックスペースのみ
-            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
-            {
-                e.Handled = true;
-            }
+
         }
 
-        
+        private void myPartyGB_Enter(object sender, EventArgs e)
+        {
+            currentGroupBoxNum = 0;
+            statusDGV.CurrentGroupBoxNum = currentGroupBoxNum;
+            statusDGV.CurrentPokes[currentGroupBoxNum] = currentPokes[currentGroupBoxNum];
+        }
+
+        private void yourPartyGB_Enter(object sender, EventArgs e)
+        {
+            currentGroupBoxNum = 1;
+            statusDGV.CurrentGroupBoxNum = currentGroupBoxNum;
+            statusDGV.CurrentPokes[currentGroupBoxNum] = currentPokes[currentGroupBoxNum];
+        }
     }
 }
