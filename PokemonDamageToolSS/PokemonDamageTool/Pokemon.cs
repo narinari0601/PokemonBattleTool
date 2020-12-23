@@ -10,6 +10,8 @@ namespace PokemonDamageTool
     {
         private string name;
 
+        private string nickName;
+
         private string type1;
 
         private string type2;
@@ -21,6 +23,8 @@ namespace PokemonDamageTool
         private string hiddenAbility;
 
         private string currentAbility;
+
+        private float weight;
 
         //種族値
         private int[] baseStatus;
@@ -47,12 +51,13 @@ namespace PokemonDamageTool
         }
 
         public string Name { get => name; set => name = value; }
-        
+        public string NickName { get => nickName; set => nickName = value; }
         public string Type1 { get => type1; set => type1 = value; }
         public string Type2 { get => type2; set => type2 = value; }
         public string Ability1 { get => ability1; set => ability1 = value; }
         public string Ability2 { get => ability2; set => ability2 = value; }
         public string HiddenAbility { get => hiddenAbility; set => hiddenAbility = value; }
+        public float Weight { get => weight; set => weight = value; }
         public int[] IndividualValues { get => individualValues; set => individualValues = value; }
         public int[] EffortValues { get => effortValues; set => effortValues = value; }
         public string CurrentAbility { get => currentAbility; set => currentAbility = value; }
@@ -60,6 +65,7 @@ namespace PokemonDamageTool
         public int[] RealValues { get => realValues; set => realValues = value; }
         public List<int[]> Statuses { get => statuses; set => statuses = value; }
         public int[] StatusLanks { get => statusLanks; set => statusLanks = value; }
+        
 
         public void Initialize(string[] data)
         {

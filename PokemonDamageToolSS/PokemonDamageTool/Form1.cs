@@ -32,13 +32,24 @@ namespace PokemonDamageTool
 
         private List<Pokemon[]> partyList;
 
-        private List<Button[]> pokeButtons;
+        private List<PictureBox[]> pokePictureBoxes;
+
+        //private List<Button[]> pokeButtons;
 
         private List<Button[]> pokeElectButtonList;
 
         private List<bool[]> pokeElectList;
 
         private ComboBox[] abilityCBs;
+
+        private GroupBox[] partyGroupBoxes;
+
+        private Panel[] selectedPanels;
+
+        private int[] panelNum;
+
+        //private Label[] pokeNameLabels;
+        
 
         //-1=null 0=自分 1=相手
         private int currentGroupBoxNum;
@@ -78,7 +89,7 @@ namespace PokemonDamageTool
 
             maxDamage = 0;
 
-            currentGroupBoxNum = -1;
+            currentGroupBoxNum = 0;
 
             partyList = new List<Pokemon[]>();
             partyList.Add(new Pokemon[6]);
@@ -96,36 +107,67 @@ namespace PokemonDamageTool
             pokeTextBoxes = new TextBox[2]
                 {myPokeTB,yourPokeTB };
 
-            pokeButtons = new List<Button[]>();
-            pokeButtons.Add(
-                new Button[6]
+            pokePictureBoxes = new List<PictureBox[]>();
+            pokePictureBoxes.Add(
+                new PictureBox[6]
                 {
-                    myPokeButton1,
-                    myPokeButton2,
-                    myPokeButton3,
-                    myPokeButton4,
-                    myPokeButton5,
-                    myPokeButton6
+                    myPokePB1,
+                    myPokePB2,
+                    myPokePB3,
+                    myPokePB4,
+                    myPokePB5,
+                    myPokePB6
                 });
 
-            pokeButtons.Add(
-                new Button[6]
+            pokePictureBoxes.Add(
+                new PictureBox[6]
                 {
-                    yourPokeButton1,
-                    yourPokeButton2,
-                    yourPokeButton3,
-                    yourPokeButton4,
-                    yourPokeButton5,
-                    yourPokeButton6
+                    yourPokePB1,
+                    yourPokePB2,
+                    yourPokePB3,
+                    yourPokePB4,
+                    yourPokePB5,
+                    yourPokePB6
                 });
 
-            for (int i = 0; i < pokeButtons.Count; i++)
+            for (int i = 0; i < pokePictureBoxes.Count; i++)
             {
-                for (int j = 0; j < pokeButtons[i].Length; j++)
+                for (int j = 0; j < pokePictureBoxes[i].Length; j++)
                 {
-                    pokeButtons[i][j].Click += new EventHandler(PokeButton_Click);
+                    pokePictureBoxes[i][j].Click += new EventHandler(PokePictureBox_Click);
                 }
             }
+
+            //pokeButtons = new List<Button[]>();
+            //pokeButtons.Add(
+            //    new Button[6]
+            //    {
+            //        myPokeButton1,
+            //        myPokeButton2,
+            //        myPokeButton3,
+            //        myPokeButton4,
+            //        myPokeButton5,
+            //        myPokeButton6
+            //    });
+
+            //pokeButtons.Add(
+            //    new Button[6]
+            //    {
+            //        yourPokeButton1,
+            //        yourPokeButton2,
+            //        yourPokeButton3,
+            //        yourPokeButton4,
+            //        yourPokeButton5,
+            //        yourPokeButton6
+            //    });
+
+            //for (int i = 0; i < pokeButtons.Count; i++)
+            //{
+            //    for (int j = 0; j < pokeButtons[i].Length; j++)
+            //    {
+            //        pokeButtons[i][j].Click += new EventHandler(PokeButton_Click);
+            //    }
+            //}
 
             pokeElectButtonList = new List<Button[]>();
             pokeElectButtonList.Add(
@@ -161,13 +203,7 @@ namespace PokemonDamageTool
 
             for (int i = 0; i < 2; i++)
             {
-                pokeElectList.Add(
-                new bool[3]
-                {
-                    false,
-                    false,
-                    false
-                });
+                pokeElectList.Add(new bool[3] { false, false, false });
             }
             
 
@@ -175,7 +211,27 @@ namespace PokemonDamageTool
             abilityCBs = new ComboBox[2]
                 {myPokeAbilityCB,yourPokeAbilityCB };
 
+            partyGroupBoxes = new GroupBox[2]
+                {myPartyGB,yourPartyGB};
+
+            for (int i = 0; i < partyGroupBoxes.Length; i++)
+            {
+                partyGroupBoxes[i].Paint += new PaintEventHandler(PartyGBOnPaint);
+            }
+
+            selectedPanels = new Panel[2]
+                {mySelectedPanel,yourSelectedPanel };
+
+            selectedPanels[0].Visible = false;
+            selectedPanels[1].Visible = false;
+
+            panelNum = new int[2] { 0, 0 };
+
+            //pokeNameLabels = new Label[2]
+            //    { myPokeName,yourPokeName};
         }
+
+        
 
         private void PokeDataInitialize()
         {
@@ -281,19 +337,37 @@ namespace PokemonDamageTool
                 minDamage = 1;
         }
 
-        private void PartyInput(Pokemon pokemon, Pokemon[] party)
+        private void PartyInput(Pokemon pokemon)
         {
 
-            int i = 0;
+            //int i = 0;
 
-            foreach (var poke in party)
+            //foreach (var poke in party)
+            //{
+            //    if (poke == null)
+            //    {
+            //        party[i] = pokemon;
+            //        break;
+            //    }
+            //    i++;
+            //}
+
+            partyList[currentGroupBoxNum][panelNum[currentGroupBoxNum]] = pokemon;
+
+            
+            currentPokes[currentGroupBoxNum] = pokemon;
+
+            SetCurrentPokemonStatus(pokemon);
+            //statusDGV.SetPokemonStatusDGV(currentPokes[currentGroupBoxNum], currentGroupBoxNum);
+
+            if (panelNum[currentGroupBoxNum] < 5)
             {
-                if (poke == null)
-                {
-                    party[i] = pokemon;
-                    break;
-                }
-                i++;
+                panelNum[currentGroupBoxNum]++;
+                Point panelPoint = new Point(pokePictureBoxes[currentGroupBoxNum][panelNum[currentGroupBoxNum]].Location.X - 2, pokePictureBoxes[currentGroupBoxNum][panelNum[currentGroupBoxNum]].Location.Y - 2);
+
+                selectedPanels[currentGroupBoxNum].Location = panelPoint;
+
+                selectedPanels[currentGroupBoxNum].Visible = true;
             }
         }
 
@@ -315,6 +389,35 @@ namespace PokemonDamageTool
             return 0;
         }
 
+        private void SetCurrentPokemonStatus(Pokemon poke)
+        {
+            //pokeNameLabels[currentGroupBoxNum].Text = poke.Name;
+
+            string[] abilities = new string[3];
+            abilities[0] = poke.Ability1;
+            abilities[1] = poke.Ability2;
+            abilities[2] = poke.HiddenAbility;
+
+            abilityCBs[currentGroupBoxNum].Items.Clear();
+
+
+            for (int i = 0; i < abilities.Length; i++)
+            {
+                if (abilities[i] != "")
+                {
+                    abilityCBs[currentGroupBoxNum].Items.Add(abilities[i]);
+
+                    if (poke.CurrentAbility == abilities[i])
+                    {
+                        abilityCBs[currentGroupBoxNum].SelectedIndex = i;
+                    }
+                }
+
+            }
+
+            statusDGV.SetPokemonStatusDGV(currentPokes[currentGroupBoxNum], currentGroupBoxNum);
+        }
+
         private void numericUpDown3_ValueChanged(object sender, EventArgs e)
         {
             float num = (float)numericUpDown3.Value;
@@ -332,10 +435,6 @@ namespace PokemonDamageTool
         
         
         
-        private void myPokeTB_TextChanged(object sender, EventArgs e)
-        {
-
-        }
         
 
         private void attackEVNumUD_ValueChanged(object sender, EventArgs e)
@@ -356,53 +455,68 @@ namespace PokemonDamageTool
             DamageCalculation();
         }
 
-        private void PokeButton_Click(object sender, EventArgs e)
+        private void PokePictureBox_Click(object sender, EventArgs e)
         {
             //クリックされたボタンのインデックス番号を取得する
-            int index = -1;
-            for (int i = 0; i < 6; i++)
+            int index1 = -1;
+            int index2 = 0;
+            for (int i = 0; i < 2; i++)
             {
-                if (pokeButtons[currentGroupBoxNum][i].Equals(sender))
+                for (int j = 0; j < 6; j++)
                 {
-                    index = i;
-                    break;
+                    if (pokePictureBoxes[i][j].Equals(sender))
+                    {
+                        index1 = i;
+                        index2 = j;
+                        break;
+                    }
                 }
             }
 
-            if (index > -1)
+            if (index1 > -1)
             {
-                attackPoke = partyList[currentGroupBoxNum][index];
+                currentGroupBoxNum = index1;
 
-                var poke= partyList[currentGroupBoxNum][index];
+                attackPoke = partyList[currentGroupBoxNum][index2];
+
+                var poke = partyList[currentGroupBoxNum][index2];
                 currentPokes[currentGroupBoxNum] = poke;
-                
+
+                Point panelPoint = new Point(pokePictureBoxes[currentGroupBoxNum][index2].Location.X - 2, pokePictureBoxes[currentGroupBoxNum][index2].Location.Y - 2);
+
+                selectedPanels[currentGroupBoxNum].Location = panelPoint;
+                selectedPanels[currentGroupBoxNum].Visible = true;
+
+                panelNum[currentGroupBoxNum] = index2;
 
                 if (poke == null)
                     return;
 
-                string[] abilities = new string[3];
-                abilities[0] = poke.Ability1;
-                abilities[1] = poke.Ability2;
-                abilities[2] = poke.HiddenAbility;
+                SetCurrentPokemonStatus(poke);
 
-                abilityCBs[currentGroupBoxNum].Items.Clear();
+                //string[] abilities = new string[3];
+                //abilities[0] = poke.Ability1;
+                //abilities[1] = poke.Ability2;
+                //abilities[2] = poke.HiddenAbility;
+
+                //abilityCBs[currentGroupBoxNum].Items.Clear();
 
 
-                for (int i = 0; i < abilities.Length; i++)
-                {
-                    if (abilities[i] != "")
-                    {
-                        abilityCBs[currentGroupBoxNum].Items.Add(abilities[i]);
+                //for (int i = 0; i < abilities.Length; i++)
+                //{
+                //    if (abilities[i] != "")
+                //    {
+                //        abilityCBs[currentGroupBoxNum].Items.Add(abilities[i]);
 
-                        if (poke.CurrentAbility == abilities[i])
-                        {
-                            abilityCBs[currentGroupBoxNum].SelectedIndex = i;
-                        }
-                    }
+                //        if (poke.CurrentAbility == abilities[i])
+                //        {
+                //            abilityCBs[currentGroupBoxNum].SelectedIndex = i;
+                //        }
+                //    }
 
-                }
-                
-                statusDGV.SetPokemonStatusDGV(currentPokes[currentGroupBoxNum],currentGroupBoxNum);
+                //}
+
+                //statusDGV.SetPokemonStatusDGV(currentPokes[currentGroupBoxNum], currentGroupBoxNum);
 
 
                 //attackPokeLabel.Text = attackPoke.Name;
@@ -410,6 +524,63 @@ namespace PokemonDamageTool
 
             }
         }
+
+        //private void PokeButton_Click(object sender, EventArgs e)
+        //{
+        //    //クリックされたボタンのインデックス番号を取得する
+        //    int index = -1;
+        //    for (int i = 0; i < 6; i++)
+        //    {
+        //        if (pokeButtons[currentGroupBoxNum][i].Equals(sender))
+        //        {
+        //            index = i;
+        //            break;
+        //        }
+        //    }
+
+        //    if (index > -1)
+        //    {
+        //        attackPoke = partyList[currentGroupBoxNum][index];
+
+        //        var poke= partyList[currentGroupBoxNum][index];
+        //        currentPokes[currentGroupBoxNum] = poke;
+                
+
+        //        if (poke == null)
+        //            return;
+
+
+
+        //        string[] abilities = new string[3];
+        //        abilities[0] = poke.Ability1;
+        //        abilities[1] = poke.Ability2;
+        //        abilities[2] = poke.HiddenAbility;
+
+        //        abilityCBs[currentGroupBoxNum].Items.Clear();
+
+
+        //        for (int i = 0; i < abilities.Length; i++)
+        //        {
+        //            if (abilities[i] != "")
+        //            {
+        //                abilityCBs[currentGroupBoxNum].Items.Add(abilities[i]);
+
+        //                if (poke.CurrentAbility == abilities[i])
+        //                {
+        //                    abilityCBs[currentGroupBoxNum].SelectedIndex = i;
+        //                }
+        //            }
+
+        //        }
+                
+        //        statusDGV.SetPokemonStatusDGV(currentPokes[currentGroupBoxNum],currentGroupBoxNum);
+
+
+        //        //attackPokeLabel.Text = attackPoke.Name;
+        //        //attackPowerLabel.Text = attackPoke.RealNumberCalculation(1).ToString();
+
+        //    }
+        //}
         
         
 
@@ -453,6 +624,7 @@ namespace PokemonDamageTool
             currentPokes[currentGroupBoxNum].CurrentAbility = abilityCBs[currentGroupBoxNum].Text;
         }
 
+
         private void PokeTB_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             switch (e.KeyCode)
@@ -461,7 +633,7 @@ namespace PokemonDamageTool
                     var currentTB = pokeTextBoxes[currentGroupBoxNum];
                     var pokeName = currentTB.Text;
                     var poke = SearchPokemonName(pokeName, currentTB);
-                    PartyInput(poke, partyList[currentGroupBoxNum]);
+                    PartyInput(poke);
                     break;
 
             }
@@ -492,5 +664,22 @@ namespace PokemonDamageTool
             statusDGV.CurrentGroupBoxNum = currentGroupBoxNum;
             statusDGV.CurrentPokes[currentGroupBoxNum] = currentPokes[currentGroupBoxNum];
         }
+
+        //パーティの外枠
+        private void PartyGBOnPaint(object sender, PaintEventArgs e)
+        {
+            Color borderColor = Color.Gray;
+
+            // テキストサイズを取得
+            Size tTextSize = TextRenderer.MeasureText(this.Text, this.Font);
+            Rectangle tBorderRect = e.ClipRectangle;
+
+            tBorderRect.Y += tTextSize.Height / 2;
+            tBorderRect.Height -= tTextSize.Height / 2;
+
+            ControlPaint.DrawBorder(e.Graphics, tBorderRect, borderColor, ButtonBorderStyle.Solid);
+        }
+        
+        
     }
 }
